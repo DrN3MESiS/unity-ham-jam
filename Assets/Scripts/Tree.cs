@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Tree : MonoBehaviour
 {
-    public float[] width = new float[2]{40,100};
-    public int[] valleys = new int[2]{0,6};
-    public int[] mountains = new int[2]{0,8};
-    public int[] fuel = new int[2]{2,3};
+    public Vector3 size;
+    public float[] scaleY = new float[2]{0.5f,1.5f};
+    public int[] spawn = new int[2]{1,3};
+    public float[] range = new float[2]{1.5f,3};
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        size = transform.localScale;
     }
 
     // Update is called once per frame
