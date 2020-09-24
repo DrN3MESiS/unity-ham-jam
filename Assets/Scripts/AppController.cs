@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class AppController : MonoBehaviour
 {
-    List<Block> GameApp;
+    List<Block> EntityController;
 
     void Start()
     {
-
-        GameApp = new List<Block>();
-        Block initBlock = new Block();
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-        initBlock.Entities.Add(new Mountain(6, 8, 2));
-
-        GameApp.Add(initBlock);
+        Block initBlock = ScriptableObject.CreateInstance<Block>();
+        int err = initBlock.Generate();
+        if (err != 0)
+        {
+            Debug.LogError("Couldn't generate block!");
+            Application.Quit(-1);
+        }
     }
 }
