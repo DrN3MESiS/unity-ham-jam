@@ -15,3 +15,18 @@ public static class IntUtil
         return random.Next(min, max);
     }
 }
+public static class DoubleUtil
+{
+    private static Random random;
+
+    private static void Init()
+    {
+        if (random == null) random = new Random();
+    }
+
+    public static double Random(float min, float max)
+    {
+        Init();
+        return random.NextDouble() * (max - min) + min;
+    }
+}

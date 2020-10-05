@@ -32,17 +32,19 @@ public class Mountain : ScriptableObject
         topWidth = IntUtil.Random(1, actualWidth - 1);
         entryWidth = IntUtil.Random(0, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
+
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
-            ValleyEntities.Add(new Valley(topWidth));
+            Valley testValley = new Valley(topWidth);
+            ValleyEntities.Add(testValley);
         }
         else
         {
             topIsValley = false;
         }
 
-        // Debug.Log("Mountain(Height: " + actualHeight + "; Width: " + actualWidth + "; Proximity: " + actualProximity + "; TopW: " + topWidth + "; EntryW: " + entryWidth + "; ExitW: " + exitWidth + ")");
+        Debug.Log("Mountain(Height: " + actualHeight + "; Width: " + actualWidth + "; Proximity: " + actualProximity + "; TopW: " + topWidth + "; EntryW: " + entryWidth + "; ExitW: " + exitWidth + ")");
     }
 
 

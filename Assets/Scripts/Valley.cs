@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Valley : MonoBehaviour
+public class Valley : ScriptableObject
 {
     public List<Tree> TreeEntities = new List<Tree>();
 
@@ -14,7 +14,8 @@ public class Valley : MonoBehaviour
 
         for (int i = 0; i < width; i++)
         {
-            TreeEntities.Add(new Tree(Tree.BaseHeight));
+            Tree testTree = new Tree((float)DoubleUtil.Random(Tree.scaleY[0], Tree.scaleY[1]));
+            TreeEntities.Add(testTree);
         }
     }
 

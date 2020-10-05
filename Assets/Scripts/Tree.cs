@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : MonoBehaviour
+public class Tree : ScriptableObject
 {
     public Vector3 size;
     public static float[] scaleY = new float[2] { 0.5f, 1.5f };
@@ -11,17 +11,16 @@ public class Tree : MonoBehaviour
 
     public static float BaseHeight = 3;
 
-    public float actualHeight = 0;
+    public float actualScale = 0;
 
-    public Tree(float height)
+    public Tree(float scale)
     {
-        actualHeight = height;
+        actualScale = scale;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        size = transform.localScale;
     }
 
     // Update is called once per frame
