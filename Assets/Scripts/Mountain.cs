@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mountain : ScriptableObject
+public class Mountain : MonoBehaviour
 {
     /* Range Properties */
     public int[] heightRange = new int[2] { 5, 8 };
@@ -36,7 +36,7 @@ public class Mountain : ScriptableObject
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
-            Valley testValley = new Valley(topWidth);
+            Valley testValley = Instantiate(new Valley(topWidth));
             ValleyEntities.Add(testValley);
         }
         else

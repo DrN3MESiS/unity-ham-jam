@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : ScriptableObject
+public class Tree : MonoBehaviour
 {
     public Vector3 size;
     public static float[] scaleY = new float[2] { 0.5f, 1.5f };

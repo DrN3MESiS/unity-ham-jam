@@ -8,7 +8,7 @@ public class AppController : MonoBehaviour
 
     void Start()
     {
-        Block initBlock = ScriptableObject.CreateInstance<Block>();
+        Block initBlock = Instantiate(new Block());
         int err = initBlock.Generate();
         if (err != 0)
         {

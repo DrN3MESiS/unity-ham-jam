@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : ScriptableObject
+public class Block : MonoBehaviour
 {
     /* Properties */
     private int maxWidth = 100;
@@ -33,7 +33,7 @@ public class Block : ScriptableObject
         /*First Pass*/
         while (true)
         {
-            Mountain testMountain = ScriptableObject.CreateInstance<Mountain>();
+            Mountain testMountain = Instantiate(new Mountain());
             if (unitsLeft - testMountain.actualWidth < 0)
             {
                 break;
