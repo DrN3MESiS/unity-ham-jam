@@ -20,9 +20,13 @@ public class Mountain : MonoBehaviour
 
     public bool topIsValley;
 
-    /* Testing */
-    public List<Valley> ValleyEntities = new List<Valley>();
+    public GameObject Entry = new GameObject();
+    public GameObject Top = new GameObject();
+    public GameObject Exit = new GameObject();
 
+    public Valley _valley = null;
+
+    /* Testing */
     public Mountain()
     {
         actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
@@ -36,8 +40,8 @@ public class Mountain : MonoBehaviour
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
-            Valley testValley = Instantiate(new Valley(topWidth));
-            ValleyEntities.Add(testValley);
+            _valley = Top.AddComponent<Valley>();
+            _valley.Generate(topWidth);
         }
         else
         {

@@ -12,7 +12,8 @@ public class Block : MonoBehaviour
     private int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
-    public List<Mountain> Entities = new List<Mountain>();
+    public List<GameObject> Entities = new List<GameObject>();
+    public List<Mountain> Scripts = new List<Mountain>();
     public int CountOfValleys = 0;
     private int unitsLeft = 100;
 
@@ -33,19 +34,21 @@ public class Block : MonoBehaviour
         /*First Pass*/
         while (true)
         {
-            Mountain testMountain = Instantiate(new Mountain());
-            if (unitsLeft - testMountain.actualWidth < 0)
+            GameObject testMountain = new GameObject();
+            Mountain _mountainScript = testMountain.AddComponent<Mountain>();
+            if (unitsLeft - _mountainScript.actualWidth < 0)
             {
                 break;
             }
 
-            if (testMountain.topIsValley)
+            if (_mountainScript.topIsValley)
             {
                 CountOfValleys++;
             }
 
             Entities.Add(testMountain);
-            unitsLeft -= testMountain.actualWidth;
+            Scripts.Add(_mountainScript);
+            unitsLeft -= _mountainScript.actualWidth;
         }
 
         Debug.Log("unitsLeft on Block after Generation: " + unitsLeft);
