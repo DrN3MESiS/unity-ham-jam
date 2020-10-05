@@ -13,6 +13,7 @@ public class Block : ScriptableObject
 
     /*  */
     public List<Mountain> Entities = new List<Mountain>();
+    public int CountOfValleys = 0;
     private int unitsLeft = 100;
 
     /* UNITY METHODS */
@@ -38,12 +39,18 @@ public class Block : ScriptableObject
                 break;
             }
 
+            if (testMountain.topIsValley)
+            {
+                CountOfValleys++;
+            }
+
             Entities.Add(testMountain);
             unitsLeft -= testMountain.actualWidth;
         }
 
         Debug.Log("unitsLeft on Block after Generation: " + unitsLeft);
         Debug.Log("Mountains Generated: " + Entities.Count);
+        Debug.Log("Valley: " + CountOfValleys);
 
         return 0;
     }
