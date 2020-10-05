@@ -21,7 +21,6 @@ public class Mountain : ScriptableObject
     public bool topIsValley;
 
     /* Testing */
-    public List<Tree> Entities = new List<Tree>();
     public List<Valley> ValleyEntities = new List<Valley>();
 
     public Mountain()
