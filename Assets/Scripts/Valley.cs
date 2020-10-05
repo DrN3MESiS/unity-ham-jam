@@ -5,13 +5,16 @@ using UnityEngine;
 public class Valley : MonoBehaviour
 {
     public static float[] width = new float[2] { 3, 5 };
-    // Start is called before the first frame update
+    public float actualWidth = 0;
+    public Valley(float width)
+    {
+        this.actualWidth = width;
+    }
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

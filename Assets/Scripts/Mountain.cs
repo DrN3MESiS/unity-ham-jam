@@ -22,6 +22,7 @@ public class Mountain : ScriptableObject
 
     /* Testing */
     public List<Tree> Entities = new List<Tree>();
+    public List<Valley> ValleyEntities = new List<Valley>();
 
     public Mountain()
     {
@@ -35,6 +36,7 @@ public class Mountain : ScriptableObject
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
+            ValleyEntities.Add(new Valley(topWidth));
         }
         else
         {
