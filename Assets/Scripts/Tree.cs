@@ -13,9 +13,9 @@ public class Tree : MonoBehaviour
 
     public float actualScale = 0;
 
-    public Tree(float scale)
+    public Tree()
     {
-        actualScale = scale;
+        actualScale = (float)DoubleUtil.Random(Tree.scaleY[0], Tree.scaleY[1]);
     }
 
     // Start is called before the first frame update
