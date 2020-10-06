@@ -21,7 +21,7 @@ public class Block : MonoBehaviour
     void Start()
     {
 
-        Debug.Log("[Block.Start()] >> " + "Generated Block");
+        //Debug.Log("[Block.Start()] >> " + "Generated Block");
 
 
         while (true)
@@ -46,8 +46,8 @@ public class Block : MonoBehaviour
 
         }
 
-        Debug.Log("Mountains Generated: " + Entities.Count);
-        Debug.Log("Valley: " + CountOfValleys);
+        /*Debug.Log("Mountains Generated: " + Entities.Count);
+        Debug.Log("Valley: " + CountOfValleys);*/
     }
     void Update()
     {

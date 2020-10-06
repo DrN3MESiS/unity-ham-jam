@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static UnityEngine.Sprite;
+using UnityEngine.UI;
 public class Mountain : MonoBehaviour
 {
     /* Range Properties */
@@ -25,7 +26,6 @@ public class Mountain : MonoBehaviour
     public GameObject Exit;
 
     public Valley _valley = null;
-
     public Mountain()
     {
         actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
@@ -40,14 +40,17 @@ public class Mountain : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("\t\t[Mountain.Start()] Created Mountain");
+        //Debug.Log("\t\t[Mountain.Start()] Created Mountain");
 
         // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
         // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
 
-        Entry = new GameObject("Entry_");
+        
         Top = new GameObject("Top_");
+        Entry = new GameObject("Entry_");
         Exit = new GameObject("Exit_");
+
+
 
         if (topWidth > Valley.width[0])
         {
