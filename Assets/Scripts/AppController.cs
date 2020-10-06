@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class AppController : MonoBehaviour
 {
-    List<GameObject> EntityController;
+    List<GameObject> BlockController = new List<GameObject>();
+    List<Block> BlockScripts = new List<Block>();
 
     void Start()
     {
-        GameObject initBlock = Instantiate(new GameObject());
 
+        GameObject initBlock = new GameObject("Block_");
         Block _blockScript = initBlock.AddComponent<Block>();
-        int err = _blockScript.Generate();
-        if (err != 0)
-        {
-            Debug.LogError("Couldn't generate block!");
-            Application.Quit(-1);
-        }
 
+        BlockController.Add(initBlock);
+        BlockScripts.Add(_blockScript);
     }
 }

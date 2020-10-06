@@ -5,9 +5,9 @@ using UnityEngine;
 public class Mountain : MonoBehaviour
 {
     /* Range Properties */
-    public int[] heightRange = new int[2] { 5, 8 };
-    public int[] widthRange = new int[2] { 6, 10 };
-    public int[] proximityRange = new int[2] { 0, 5 };
+    public static int[] heightRange = new int[2] { 5, 8 };
+    public static int[] widthRange = new int[2] { 6, 10 };
+    public static int[] proximityRange = new int[2] { 0, 5 };
 
     /* Mountain Properties */
     public int actualHeight;
@@ -20,13 +20,12 @@ public class Mountain : MonoBehaviour
 
     public bool topIsValley;
 
-    public GameObject Entry = new GameObject();
-    public GameObject Top = new GameObject();
-    public GameObject Exit = new GameObject();
+    public GameObject Entry;
+    public GameObject Top;
+    public GameObject Exit;
 
     public Valley _valley = null;
 
-    /* Testing */
     public Mountain()
     {
         actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
@@ -36,6 +35,19 @@ public class Mountain : MonoBehaviour
         topWidth = IntUtil.Random(1, actualWidth - 1);
         entryWidth = IntUtil.Random(0, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
+
+    }
+
+    void Start()
+    {
+        Debug.Log("\t\t[Mountain.Start()] Created Mountain");
+
+        // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
+        // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
+
+        Entry = new GameObject("Entry_");
+        Top = new GameObject("Top_");
+        Exit = new GameObject("Exit_");
 
         if (topWidth > Valley.width[0])
         {
@@ -47,13 +59,6 @@ public class Mountain : MonoBehaviour
         {
             topIsValley = false;
         }
-
-        Debug.Log("Mountain(Height: " + actualHeight + "; Width: " + actualWidth + "; Proximity: " + actualProximity + "; TopW: " + topWidth + "; EntryW: " + entryWidth + "; ExitW: " + exitWidth + ")");
-    }
-
-
-    void Start()
-    {
 
     }
 

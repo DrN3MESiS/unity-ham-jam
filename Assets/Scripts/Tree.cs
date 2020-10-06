@@ -21,6 +21,7 @@ public class Tree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("\t\t\t\t\t[Tree.Start()] >>> Generated Tree!");
     }
 
     // Update is called once per frame
