@@ -45,9 +45,13 @@ public class Mountain : MonoBehaviour
         // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
         // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
 
-        Entry = new GameObject("Entry_");
+        if (entryWidth != 0)
+            Entry = new GameObject("Entry_");
+
         Top = new GameObject("Top_");
-        Exit = new GameObject("Exit_");
+
+        if (exitWidth != 0)
+            Exit = new GameObject("Exit_");
 
         if (topWidth > Valley.width[0])
         {
