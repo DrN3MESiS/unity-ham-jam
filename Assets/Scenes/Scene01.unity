@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -306,9 +306,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1870156121}
   - component: {fileID: 1870156120}
+  - component: {fileID: 1870156122}
   m_Layer: 0
   m_Name: GameGenerator
-  m_TagString: Untagged
+  m_TagString: Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,6 +336,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: df4a0ff4c952410468712b4bc960b0ac, type: 3}
   - {fileID: 21300000, guid: 37bbb20e5b4ce4a4b84f2e8fbec6e8a9, type: 3}
   - {fileID: 21300000, guid: 058e6859b222f924cad877e2c14f783d, type: 3}
+  startReference: {x: 0, y: 0, z: 0}
+  BlockPrefab: {fileID: 238860392705887141, guid: d61b6085092dc18479da7a62948570ce,
+    type: 3}
+  MountainSetTestPrefab: {fileID: 1746632626974775686, guid: 0e7f197d7fbfc5a4882fbcddc47b8416,
+    type: 3}
+  MountainEntryPrefab: {fileID: 2205317183400028054, guid: a5e0241527d76d84c869729107f4f81a,
+    type: 3}
+  MountainTopPrefab: {fileID: 6134095250988661367, guid: 73c70bc3674984c4693558694c87bea2,
+    type: 3}
+  MountainExitPrefab: {fileID: 9038364855648563287, guid: 48f1d5839cc38d24ab07f8362f353eba,
+    type: 3}
+  ValleyPrefab: {fileID: 7255510132197777774, guid: 8b25df7f29176084c9afac20666c2697,
+    type: 3}
+  TreePrefab: {fileID: 311746934996143449, guid: 24eea4b4849def84191af437084a6daa,
+    type: 3}
 --- !u!4 &1870156121
 Transform:
   m_ObjectHideFlags: 0
@@ -349,3 +365,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870156122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870156119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3cd5dea34b6b8f41acf8aa90bead87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
