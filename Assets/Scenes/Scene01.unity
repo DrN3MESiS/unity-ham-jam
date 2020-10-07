@@ -121,36 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &631822396
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 631822397}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &631822397
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631822396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.013, y: -0.56853914, z: 3.6566563}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1127043742
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,19 +337,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 37bbb20e5b4ce4a4b84f2e8fbec6e8a9, type: 3}
   - {fileID: 21300000, guid: 058e6859b222f924cad877e2c14f783d, type: 3}
   startReference: {x: 0, y: 0, z: 0}
-  BlockPrefab: {fileID: 238860392705887141, guid: d61b6085092dc18479da7a62948570ce,
+  BlockPrefab: {fileID: 4525826431520847713, guid: bb8c56e5b519be5499664c28240346f1,
     type: 3}
-  MountainSetTestPrefab: {fileID: 1746632626974775686, guid: 0e7f197d7fbfc5a4882fbcddc47b8416,
+  MountainSetTestPrefab: {fileID: 6800131786255764478, guid: 3201e364c755d6144a0354ff4111bf4b,
     type: 3}
-  MountainEntryPrefab: {fileID: 2205317183400028054, guid: a5e0241527d76d84c869729107f4f81a,
+  MountainEntryPrefab: {fileID: 1545199513595237806, guid: c45c2421d9d863f408b808f34287320c,
     type: 3}
-  MountainTopPrefab: {fileID: 6134095250988661367, guid: 73c70bc3674984c4693558694c87bea2,
+  MountainTopPrefab: {fileID: 6333303934432694308, guid: 7483a8d829df6cc46a512e70983713d6,
     type: 3}
-  MountainExitPrefab: {fileID: 9038364855648563287, guid: 48f1d5839cc38d24ab07f8362f353eba,
+  MountainExitPrefab: {fileID: 1545199513595237806, guid: c45c2421d9d863f408b808f34287320c,
     type: 3}
-  ValleyPrefab: {fileID: 7255510132197777774, guid: 8b25df7f29176084c9afac20666c2697,
+  ValleyPrefab: {fileID: 8495948151184830209, guid: be994e8b9db0c7f4ba3406c3e392baeb,
     type: 3}
-  TreePrefab: {fileID: 311746934996143449, guid: 24eea4b4849def84191af437084a6daa,
+  TreePrefab: {fileID: 663991184261819177, guid: b75ec12e62b3ad343815eb0881eb65ed,
     type: 3}
 --- !u!4 &1870156121
 Transform:
