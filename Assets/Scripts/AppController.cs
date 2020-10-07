@@ -36,11 +36,20 @@ public class AppController : MonoBehaviour
                 EXIT.flipX = true;
 
                 GameObject entrada = mountains[i].Entry;
+                entrada.gameObject.transform.localScale -= new Vector3(0.9f, 0.9f, 0);
                 GameObject salida = mountains[i].Exit;
-                entrada.transform.position = new Vector3(x,0,0);
-                x += mountains[i].entryWidth + 3;
-                salida.transform.position = new Vector3(x,0,0);
-                x += mountains[i].exitWidth + 3;
+                salida.gameObject.transform.localScale -= new Vector3(0.9f, 0.9f, 0);
+                if (mountains[i].entryWidth > 0){
+                    entrada.transform.position = new Vector3(x,0,0);
+                    x += mountains[i].entryWidth;
+                }
+
+                if (mountains[i].exitWidth > 0){
+                    salida.transform.position = new Vector3(x,0,0);
+                    x += mountains[i].exitWidth;
+                }
+                
+                
             }
         }
             
@@ -48,7 +57,7 @@ public class AppController : MonoBehaviour
 
         IEnumerator waiter()
         {   
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             showMountains();
             
         }
