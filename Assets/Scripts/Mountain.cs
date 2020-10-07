@@ -33,7 +33,7 @@ public class Mountain : MonoBehaviour
         actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
         topWidth = IntUtil.Random(1, actualWidth - 1);
-        entryWidth = IntUtil.Random(0, actualWidth - topWidth);
+        entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
 
     }
