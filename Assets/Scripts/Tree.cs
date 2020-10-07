@@ -8,6 +8,7 @@ public class Tree : MonoBehaviour
     public static float[] scaleY = new float[2] { 0.5f, 1.5f };
     public static int[] spawn = new int[2] { 1, 3 };
     public static float[] range = new float[2] { 1.5f, 3 };
+    public static int BaseWidth = 1;
 
     public static float BaseHeight = 3;
 

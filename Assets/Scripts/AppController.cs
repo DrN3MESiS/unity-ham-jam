@@ -10,15 +10,22 @@ public class AppController : MonoBehaviour
     public Sprite[] valleySprites = new Sprite[3];
 
     public Vector3 startReference = new Vector3(0, 0, 0);
-    void Start()
+
+    IEnumerator GenerateGame()
     {
         for (int i = 0; i < 2; i++)
         {
             GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference);
             Block blockScript = tempBlock.GetComponent<Block>();
             BlockController.Add(tempBlock);
+
+            yield return new WaitForSeconds(5);
             startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
         }
+    }
+    void Start()
+    {
+        StartCoroutine(GenerateGame());
         // manualMountains();
 
         // StartCoroutine(waiter());
