@@ -11,20 +11,30 @@ public class AppController : MonoBehaviour
 
     public Vector3 startReference = new Vector3(0, 0, 0);
 
+    public GameObject BlockPrefab;
+    public GameObject MountainSetTestPrefab;
+    public GameObject MountainEntryPrefab;
+    public GameObject MountainTopPrefab;
+    public GameObject MountainExitPrefab;
+    public GameObject ValleyPrefab;
+    public GameObject TreePrefab;
+
     IEnumerator GenerateGame()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 5; i++)
         {
-            GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference);
+            // GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference);
+            GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference, BlockPrefab);
             Block blockScript = tempBlock.GetComponent<Block>();
             BlockController.Add(tempBlock);
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
         }
     }
     void Start()
     {
+        gameObject.tag = "Controller";
         StartCoroutine(GenerateGame());
         // manualMountains();
 

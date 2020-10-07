@@ -52,14 +52,36 @@ public class Mountain : MonoBehaviour
 
     void Start()
     {
+        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
         transform.position = startPosition;
         if (topIsValley)
         {
             if (this.Top != null)
             {
-                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth);
+                // _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth);
+                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth, test.ValleyPrefab);
             }
         }
+
+        // Debug.Log("actualWidth: " + actualWidth);
+        this.transform.position += new Vector3(0, 1, 0);
+        this.transform.localScale = new Vector3(this.transform.localScale.x * actualWidth, this.transform.localScale.y, this.transform.localScale.z);
+
+
+        // Debug.Log("entryWidth: " + entryWidth);
+        this.Entry.transform.position += new Vector3(0, 1.5f, 0);
+        this.Entry.transform.localScale = new Vector3(this.Entry.transform.localScale.x * entryWidth, this.Entry.transform.localScale.y, this.Entry.transform.localScale.z);
+
+        // Debug.Log("topWidth: " + topWidth);
+        this.Top.transform.position += new Vector3(0, 1.6f, 0);
+        this.Top.transform.localScale = new Vector3(this.Top.transform.localScale.x * topWidth, this.Top.transform.localScale.y, this.Top.transform.localScale.z);
+        if (Exit != null)
+        {
+            // Debug.Log("exitWidth: " + exitWidth);
+            this.Exit.transform.position += new Vector3(0, 1.5f, 0);
+            this.Exit.transform.localScale = new Vector3(this.Exit.transform.localScale.x * exitWidth, this.Exit.transform.localScale.y, this.Exit.transform.localScale.z);
+        }
+
     }
 
 }
