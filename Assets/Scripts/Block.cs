@@ -26,8 +26,13 @@ public class Block : MonoBehaviour
         transform.position = startPosition;
         AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
 
-        for (int i = 0; i < 4; i++)
+        int i = 0;
+        while (true)
         {
+
+            // }
+            // for (int i = 0; i < 4; i++)
+            // {
             // GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition);
 
             GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition, test.MountainSetTestPrefab, test.MountainEntryPrefab, test.MountainTopPrefab, test.MountainExitPrefab);
@@ -43,7 +48,7 @@ public class Block : MonoBehaviour
             MountainEntities.Add(tempMountain);
 
             startPosition = new Vector3(startPosition.x + mountainScript.actualWidth, startPosition.y, startPosition.z);
-
+            i++;
         }
 
 

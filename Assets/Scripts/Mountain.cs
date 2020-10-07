@@ -84,4 +84,13 @@ public class Mountain : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        if (Entry != null)
+            Destroy(Entry);
+        if (Top != null)
+            Destroy(Top);
+        if (Exit != null)
+            Destroy(Exit);
+    }
 }
