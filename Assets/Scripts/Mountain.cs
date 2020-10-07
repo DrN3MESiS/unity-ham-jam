@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Mountain : MonoBehaviour
 {
     public int id = 0;
+    public Vector3 startPosition;
     /* Range Properties */
     public static int[] heightRange = new int[2] { 5, 8 };
     public static int[] widthRange = new int[2] { 6, 10 };
@@ -51,11 +52,12 @@ public class Mountain : MonoBehaviour
 
     void Start()
     {
+        transform.position = startPosition;
         if (topIsValley)
         {
             if (this.Top != null)
             {
-                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, new Vector3(0, 0, 0), topWidth);
+                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth);
             }
         }
     }
