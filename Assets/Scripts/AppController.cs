@@ -21,7 +21,12 @@ public class AppController : MonoBehaviour
 
     IEnumerator GenerateGame()
     {
-        for (int i = 0; i < 5; i++)
+        // int i = 0;
+        // while (true)
+        // {
+
+        // }
+        for (int i = 0; i < 10; i++)
         {
             // GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference);
             GameObject tempBlock = ObjectGenerator.GenerateBlock(i, startReference, BlockPrefab);
@@ -30,6 +35,7 @@ public class AppController : MonoBehaviour
 
             yield return new WaitForSeconds(2);
             startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
+            // i++;
         }
     }
     void Start()
