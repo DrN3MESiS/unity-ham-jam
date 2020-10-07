@@ -4,53 +4,37 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    public int id = 0;
     /* Properties */
     private int maxWidth = 100;
-
-    private static int[] valleysEntityAmount = new int[2] { 0, 6 };
-    private static int[] mountainEntityAmount = new int[2] { 0, 8 };
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
-    public List<GameObject> Entities = new List<GameObject>();
-    public List<Mountain> Scripts = new List<Mountain>();
-    public int CountOfValleys = 0;
-    private int unitsLeft = 100;
+    public List<GameObject> MountainEntities = new List<GameObject>();
+    public int unitsLeft = 100;
+
+    /* Properties Setup */
+    public Block()
+    {
+
+    }
 
     /* UNITY METHODS */
     void Start()
     {
-
-        //Debug.Log("[Block.Start()] >> " + "Generated Block");
-
-
-        while (true)
+        for (int i = 0; i < 5; i++)
         {
-            GameObject testMountain = new GameObject("Mountain_");
-            Mountain _mountainScript = testMountain.AddComponent<Mountain>();
+            GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, new Vector3(0, 0, 0));
+            Mountain mountainScript = tempMountain.GetComponent<Mountain>();
 
-            if (unitsLeft - _mountainScript.actualWidth < 0)
+            if (unitsLeft - mountainScript.actualWidth < 0)
             {
+                Destroy(tempMountain);
                 break;
             }
 
-
-            if (_mountainScript.topIsValley)
-            {
-                CountOfValleys++;
-            }
-
-            Entities.Add(testMountain);
-            Scripts.Add(_mountainScript);
-            unitsLeft -= _mountainScript.actualWidth;
-
+            unitsLeft -= mountainScript.actualWidth;
+            MountainEntities.Add(tempMountain);
         }
-
-        /*Debug.Log("Mountains Generated: " + Entities.Count);
-        Debug.Log("Valley: " + CountOfValleys);*/
-    }
-    void Update()
-    {
-
     }
 }

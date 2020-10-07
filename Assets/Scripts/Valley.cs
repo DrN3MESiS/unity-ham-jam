@@ -4,35 +4,32 @@ using UnityEngine;
 
 public class Valley : MonoBehaviour
 {
+    public int id = 0;
     public List<GameObject> TreeGameObjects = new List<GameObject>();
-    public List<Tree> TreeEntities = new List<Tree>();
 
     public static float[] width = new float[2] { 3, 5 };
     public float actualWidth = 0;
 
-    public void Generate(float width)
+    // /* Properties Setup */
+    public Valley()
     {
-        this.actualWidth = width;
 
-        for (int i = 0; i < width; i++)
-        {
-            GameObject testTree = new GameObject("Tree_");
-            Tree _scriptTree = testTree.AddComponent<Tree>();
-
-            TreeEntities.Add(_scriptTree);
-            TreeGameObjects.Add(testTree);
-            Debug.Log("\t\t\t\t[Valley.Generate()] >> Created Tree");
-        }
     }
-
 
     void Start()
     {
-        Debug.Log("\t\t\t[Valley.Start] >> Created Valley");
-    }
-
-    void Update()
-    {
-
+        if (actualWidth > 1)
+        {
+            int numberOfTrees = IntUtil.Random(1, (int)actualWidth);
+            for (int i = 0; i < actualWidth; i++)
+            {
+                GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i, new Vector3(0, 0, 0));
+                TreeGameObjects.Add(tempTree);
+            }
+        }
+        else
+        {
+            Debug.LogError("[VALLEY] >> Width came as 0");
+        }
     }
 }

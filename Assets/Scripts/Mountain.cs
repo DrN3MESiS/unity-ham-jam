@@ -5,6 +5,7 @@ using static UnityEngine.Sprite;
 using UnityEngine.UI;
 public class Mountain : MonoBehaviour
 {
+    public int id = 0;
     /* Range Properties */
     public static int[] heightRange = new int[2] { 5, 8 };
     public static int[] widthRange = new int[2] { 6, 10 };
@@ -25,7 +26,9 @@ public class Mountain : MonoBehaviour
     public GameObject Top;
     public GameObject Exit;
 
-    public Valley _valley = null;
+    public GameObject _Valley;
+
+    /* Properties Setup */
     public Mountain()
     {
         actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
@@ -35,58 +38,26 @@ public class Mountain : MonoBehaviour
         topWidth = IntUtil.Random(1, actualWidth - 1);
         entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
-    }
-
-    void Start()
-    {
-        //Debug.Log("\t\t[Mountain.Start()] Created Mountain");
-
-        // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
-        // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
-        Entry = new GameObject("Entry_");
-
-        Top = new GameObject("Top_");
-
-        if (exitWidth != 0)
-            Exit = new GameObject("Exit_");
-
-
 
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
-            _valley = Top.AddComponent<Valley>();
-            _valley.Generate(topWidth);
         }
         else
         {
             topIsValley = false;
         }
-
     }
 
-    public void setParent(GameObject go, int id)
+    void Start()
     {
-        Entry.transform.SetParent(go.GetComponent<Transform>());
-        Entry.name = "Entry_" + id;
-        Top.transform.SetParent(go.GetComponent<Transform>());
-        Top.name = "Top_" + id;
-
-
-        if (exitWidth != 0)
+        if (topIsValley)
         {
-            Exit.transform.SetParent(go.GetComponent<Transform>());
-            Exit.name = "Exit_" + id;
+            if (this.Top != null)
+            {
+                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, new Vector3(0, 0, 0), topWidth);
+            }
         }
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 
 }

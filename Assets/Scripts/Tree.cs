@@ -13,6 +13,7 @@ public class Tree : MonoBehaviour
 
     public float actualScale = 0;
 
+    /* Properties Setup */
     public Tree()
     {
         actualScale = (float)DoubleUtil.Random(Tree.scaleY[0], Tree.scaleY[1]);
@@ -21,7 +22,7 @@ public class Tree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("\t\t\t\t\t[Tree.Start()] >>> Generated Tree!");
+        // Debug.Log("\t\t\t\t\t[Tree.Start()] >>> Generated Tree!");
     }
 
     // Update is called once per frame
