@@ -33,7 +33,7 @@ public class Mountain : MonoBehaviour
         actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
         topWidth = IntUtil.Random(1, actualWidth - 1);
-        entryWidth = IntUtil.Random(0, actualWidth - topWidth);
+        entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
 
     }
@@ -45,10 +45,13 @@ public class Mountain : MonoBehaviour
         // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
         // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
 
-        
+        if (entryWidth != 0)
+            Entry = new GameObject("Entry_");
+
         Top = new GameObject("Top_");
-        Entry = new GameObject("Entry_");
-        Exit = new GameObject("Exit_");
+
+        if (exitWidth != 0)
+            Exit = new GameObject("Exit_");
 
 
 
