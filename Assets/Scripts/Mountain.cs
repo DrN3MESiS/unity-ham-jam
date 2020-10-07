@@ -35,7 +35,6 @@ public class Mountain : MonoBehaviour
         topWidth = IntUtil.Random(1, actualWidth - 1);
         entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
-
     }
 
     void Start()
@@ -44,9 +43,7 @@ public class Mountain : MonoBehaviour
 
         // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
         // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
-
-        if (entryWidth != 0)
-            Entry = new GameObject("Entry_");
+        Entry = new GameObject("Entry_");
 
         Top = new GameObject("Top_");
 
@@ -64,6 +61,22 @@ public class Mountain : MonoBehaviour
         else
         {
             topIsValley = false;
+        }
+
+    }
+
+    public void setParent(GameObject go, int id)
+    {
+        Entry.transform.SetParent(go.GetComponent<Transform>());
+        Entry.name = "Entry_" + id;
+        Top.transform.SetParent(go.GetComponent<Transform>());
+        Top.name = "Top_" + id;
+
+
+        if (exitWidth != 0)
+        {
+            Exit.transform.SetParent(go.GetComponent<Transform>());
+            Exit.name = "Exit_" + id;
         }
 
     }
