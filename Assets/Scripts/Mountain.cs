@@ -41,6 +41,11 @@ public class Mountain : MonoBehaviour
         entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
 
+        Debug.Log("actualWidth: " + actualWidth);
+        Debug.Log("topWidth: " + topWidth);
+        Debug.Log("entryWidth: " + entryWidth);
+        Debug.Log("exitWidth: " + exitWidth + "\n");
+
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
@@ -65,21 +70,21 @@ public class Mountain : MonoBehaviour
         }
 
         // Debug.Log("actualWidth: " + actualWidth);
-        this.transform.position += new Vector3(0, 1, 0);
+        // this.transform.position += new Vector3(0, 1, 0);
         this.transform.localScale = new Vector3(this.transform.localScale.x * actualWidth, this.transform.localScale.y, this.transform.localScale.z);
 
 
         // Debug.Log("entryWidth: " + entryWidth);
-        this.Entry.transform.position += new Vector3(0, 1.5f, 0);
+        // this.Entry.transform.position += new Vector3(0, 1.5f, 0);
         this.Entry.transform.localScale = new Vector3(this.Entry.transform.localScale.x * entryWidth, this.Entry.transform.localScale.y, this.Entry.transform.localScale.z);
 
         // Debug.Log("topWidth: " + topWidth);
-        this.Top.transform.position += new Vector3(0, 1.6f, 0);
+        // this.Top.transform.position += new Vector3(0, 1.6f, 0);
         this.Top.transform.localScale = new Vector3(this.Top.transform.localScale.x * topWidth, this.Top.transform.localScale.y, this.Top.transform.localScale.z);
         if (Exit != null)
         {
             // Debug.Log("exitWidth: " + exitWidth);
-            this.Exit.transform.position += new Vector3(0, 1.5f, 0);
+            // this.Exit.transform.position += new Vector3(0, 1.5f, 0);
             this.Exit.transform.localScale = new Vector3(this.Exit.transform.localScale.x * exitWidth, this.Exit.transform.localScale.y, this.Exit.transform.localScale.z);
         }
 
