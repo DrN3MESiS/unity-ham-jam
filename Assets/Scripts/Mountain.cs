@@ -99,4 +99,20 @@ public class Mountain : MonoBehaviour
         if (Exit != null)
             Destroy(Exit);
     }
+
+
+    public int Draw(int endFake){
+        float end = (float)endFake;
+        GameObject entryInst = Instantiate(AppController.EntryPrefab, new Vector3(end+(float)(entryWidth)/2.0f,0,0), Quaternion.Euler(0,0,0));
+        entryInst.transform.localScale = new Vector3((float)entryWidth/AppController.spriteScale,1/AppController.spriteScale,1/AppController.spriteScale);
+        end += this.entryWidth;
+        GameObject topInst = Instantiate(AppController.TopPrefab, new Vector3(end+(float)(topWidth)/2.0f,0,0), Quaternion.Euler(0,0,0));
+        topInst.transform.localScale = new Vector3((float)topWidth/AppController.spriteScale,1/AppController.spriteScale,1/AppController.spriteScale);
+        end += this.topWidth;
+        GameObject exitInst = Instantiate(AppController.ExitPrefab, new Vector3(end+(float)(exitWidth)/2.0f,0,0), Quaternion.Euler(0,0,0));
+        exitInst.transform.localScale = new Vector3((float)exitWidth/AppController.spriteScale,1/AppController.spriteScale,1/AppController.spriteScale);
+        end += this.exitWidth;
+
+        return (int)(end);
+    }
 }
