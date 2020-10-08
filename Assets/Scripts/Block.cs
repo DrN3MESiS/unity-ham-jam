@@ -51,20 +51,19 @@ public class Block : MonoBehaviour
             // i++;
         }
 
-        int end = 0;
-        foreach (GameObject entity in this.MountainEntities)
-        {
-            Mountain mountain = entity.GetComponent<Mountain>();
-            end = mountain.Draw(end);
-        }
-
         /*Debug.Log("Mountains Generated: " + Entities.Count);
         Debug.Log("Valley: " + CountOfValleys);*/
-    }
-    void Update()
-    {
 
         // this.transform.localScale += new Vector3(Mathf.Abs(unitsLeft - 100), 0, 0);
         this.transform.localScale = new Vector3(this.transform.localScale.x * Mathf.Abs(unitsLeft - 100), transform.localScale.y, transform.localScale.z);
+        this.Draw();
+    }
+
+    public void Draw(){
+        foreach (GameObject entity in this.MountainEntities)
+        {
+            Mountain mountain = entity.GetComponent<Mountain>();
+            mountain.Draw();
+        }
     }
 }

@@ -101,8 +101,8 @@ public class Mountain : MonoBehaviour
     }
 
 
-    public int Draw(int endFake){
-        float end = (float)endFake;
+    public void Draw(){
+        float end = (float)AppController.LastEnd;
         GameObject entryInst = Instantiate(AppController.EntryPrefab, new Vector3(end+(float)(entryWidth)/2.0f,0,0), Quaternion.Euler(0,0,0));
         entryInst.transform.localScale = new Vector3((float)entryWidth/AppController.spriteScale,1/AppController.spriteScale,1/AppController.spriteScale);
         end += this.entryWidth;
@@ -113,6 +113,6 @@ public class Mountain : MonoBehaviour
         exitInst.transform.localScale = new Vector3((float)exitWidth/AppController.spriteScale,1/AppController.spriteScale,1/AppController.spriteScale);
         end += this.exitWidth;
 
-        return (int)(end);
+        AppController.LastEnd = (int)(end);
     }
 }
