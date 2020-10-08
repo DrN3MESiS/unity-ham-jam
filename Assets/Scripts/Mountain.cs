@@ -5,6 +5,8 @@ using static UnityEngine.Sprite;
 using UnityEngine.UI;
 public class Mountain : MonoBehaviour
 {
+    public int id = 0;
+    public Vector3 startPosition;
     /* Range Properties */
     public static int[] heightRange = new int[2] { 5, 8 };
     public static int[] widthRange = new int[2] { 6, 10 };
@@ -25,68 +27,71 @@ public class Mountain : MonoBehaviour
     public GameObject Top;
     public GameObject Exit;
 
-    public Valley _valley = null;
+    public GameObject _Valley;
+
+    /* Properties Setup */
     public Mountain()
     {
         actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
         actualWidth = IntUtil.Random(widthRange[0], widthRange[1]);
         actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
+
         topWidth = IntUtil.Random(1, actualWidth - 1);
         entryWidth = IntUtil.Random(1, actualWidth - topWidth);
         exitWidth = actualWidth - topWidth - entryWidth;
-    }
-
-    void Start()
-    {
-        //Debug.Log("\t\t[Mountain.Start()] Created Mountain");
-
-        // Debug.LogFormat("\t\t[Mountain] > Width: " + actualWidth + ", Height: " + actualHeight + ", TopW: " + topWidth + ", EntryW: " + entryWidth + ", ExitW: " + exitWidth + "");
-        // Debug.LogFormat("\t\t[Mountain] > TopIsValley? " + (topWidth > Valley.width[0]) + "");
-        Entry = new GameObject("Entry_");
-
-        Top = new GameObject("Top_");
-
-        if (exitWidth != 0)
-            Exit = new GameObject("Exit_");
-
-
 
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
-            _valley = Top.AddComponent<Valley>();
-            _valley.Generate(topWidth);
         }
         else
         {
             topIsValley = false;
         }
-
     }
 
-    public void setParent(GameObject go, int id)
+    void Start()
     {
-        Entry.transform.SetParent(go.GetComponent<Transform>());
-        Entry.name = "Entry_" + id;
-        Top.transform.SetParent(go.GetComponent<Transform>());
-        Top.name = "Top_" + id;
-
-
-        if (exitWidth != 0)
+        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
+        transform.position = startPosition;
+        if (topIsValley)
         {
-            Exit.transform.SetParent(go.GetComponent<Transform>());
-            Exit.name = "Exit_" + id;
+            if (this.Top != null)
+            {
+                // _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth);
+                _Valley = ObjectGenerator.GenerateValley(this.Top, id, 0, Top.transform.position, topWidth, test.ValleyPrefab);
+            }
+        }
+
+        // Debug.Log("actualWidth: " + actualWidth);
+        this.transform.position += new Vector3(0, 1, 0);
+        this.transform.localScale = new Vector3(this.transform.localScale.x * actualWidth, this.transform.localScale.y, this.transform.localScale.z);
+
+
+        // Debug.Log("entryWidth: " + entryWidth);
+        this.Entry.transform.position += new Vector3(0, 1.5f, 0);
+        this.Entry.transform.localScale = new Vector3(this.Entry.transform.localScale.x * entryWidth, this.Entry.transform.localScale.y, this.Entry.transform.localScale.z);
+
+        // Debug.Log("topWidth: " + topWidth);
+        this.Top.transform.position += new Vector3(0, 1.6f, 0);
+        this.Top.transform.localScale = new Vector3(this.Top.transform.localScale.x * topWidth, this.Top.transform.localScale.y, this.Top.transform.localScale.z);
+        if (Exit != null)
+        {
+            // Debug.Log("exitWidth: " + exitWidth);
+            this.Exit.transform.position += new Vector3(0, 1.5f, 0);
+            this.Exit.transform.localScale = new Vector3(this.Exit.transform.localScale.x * exitWidth, this.Exit.transform.localScale.y, this.Exit.transform.localScale.z);
         }
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-
+        if (Entry != null)
+            Destroy(Entry);
+        if (Top != null)
+            Destroy(Top);
+        if (Exit != null)
+            Destroy(Exit);
     }
-
-
-
 }

@@ -4,53 +4,55 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    public int id = 0;
     /* Properties */
+    public Vector3 startPosition;
     private int maxWidth = 100;
-
-    private static int[] valleysEntityAmount = new int[2] { 0, 6 };
-    private static int[] mountainEntityAmount = new int[2] { 0, 8 };
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
-    public List<GameObject> Entities = new List<GameObject>();
-    public List<Mountain> Scripts = new List<Mountain>();
-    public int CountOfValleys = 0;
-    private int unitsLeft = 100;
+    public List<GameObject> MountainEntities = new List<GameObject>();
+    public int unitsLeft = 100;
+
+    /* Properties Setup */
+    public Block()
+    {
+
+    }
 
     /* UNITY METHODS */
     void Start()
     {
+        transform.position = startPosition;
+        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
 
-        //Debug.Log("[Block.Start()] >> " + "Generated Block");
-
-
+        int i = 0;
         while (true)
         {
-            GameObject testMountain = new GameObject("Mountain_");
-            Mountain _mountainScript = testMountain.AddComponent<Mountain>();
 
-            if (unitsLeft - _mountainScript.actualWidth < 0)
+            // }
+            // for (int i = 0; i < 4; i++)
+            // {
+            // GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition);
+
+            GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition, test.MountainSetTestPrefab, test.MountainEntryPrefab, test.MountainTopPrefab, test.MountainExitPrefab);
+            Mountain mountainScript = tempMountain.GetComponent<Mountain>();
+
+            if (unitsLeft - mountainScript.actualWidth < 0)
             {
+                Destroy(tempMountain);
                 break;
             }
 
+            unitsLeft -= mountainScript.actualWidth;
+            MountainEntities.Add(tempMountain);
 
-            if (_mountainScript.topIsValley)
-            {
-                CountOfValleys++;
-            }
-
-            Entities.Add(testMountain);
-            Scripts.Add(_mountainScript);
-            unitsLeft -= _mountainScript.actualWidth;
-
+            startPosition = new Vector3(startPosition.x + mountainScript.actualWidth, startPosition.y, startPosition.z);
+            i++;
         }
 
-        /*Debug.Log("Mountains Generated: " + Entities.Count);
-        Debug.Log("Valley: " + CountOfValleys);*/
-    }
-    void Update()
-    {
 
+        // this.transform.localScale += new Vector3(Mathf.Abs(unitsLeft - 100), 0, 0);
+        this.transform.localScale = new Vector3(this.transform.localScale.x * Mathf.Abs(unitsLeft - 100), transform.localScale.y, transform.localScale.z);
     }
 }
