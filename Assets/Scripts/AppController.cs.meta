@@ -3,7 +3,20 @@ guid: a3fec90d3725d364a942bb0a707d0b9c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Entry_Prefab: {fileID: 6120111501647756366, guid: a27a2f8cb06109e4fa99f21270529191,
+      type: 3}
+  - Top_Prefab: {fileID: 2966122128560914412, guid: 4b87206483107d143b466cf7b9c67d2a,
+      type: 3}
+  - Exit_Prefab: {fileID: 3867428064751516953, guid: 53d33f5f4968d06488af6fd44addd476,
+      type: 3}
+  - BlockPrefab: {instanceID: 0}
+  - MountainSetTestPrefab: {instanceID: 0}
+  - MountainEntryPrefab: {instanceID: 0}
+  - MountainTopPrefab: {instanceID: 0}
+  - MountainExitPrefab: {instanceID: 0}
+  - ValleyPrefab: {instanceID: 0}
+  - TreePrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
