@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AppController : MonoBehaviour
-{
+{    
+    public GameObject Entry_Prefab, Top_Prefab, Exit_Prefab;
+    public static GameObject EntryPrefab, TopPrefab, ExitPrefab;
+    public static int LastEnd = 0;
+    public static float spriteScale = 4.0f;
     List<GameObject> BlockController = new List<GameObject>();
     List<Block> BlockScripts = new List<Block>();
     public Sprite[] sprites = new Sprite[5];
@@ -42,6 +46,11 @@ public class AppController : MonoBehaviour
     {
         gameObject.tag = "Controller";
         StartCoroutine(GenerateGame());
+
+        EntryPrefab = Entry_Prefab;
+        TopPrefab = Top_Prefab;
+        ExitPrefab = Exit_Prefab;
+
         // manualMountains();
 
         // StartCoroutine(waiter());

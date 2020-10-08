@@ -28,9 +28,12 @@ public class Valley : MonoBehaviour
             for (int i = 0; i < numberOfTrees; i++)
             {
                 // GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i, initPos);
-                GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i, initPos, test.TreePrefab);
+                GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i,
+                new Vector3(initPos.x + 1.0f, initPos.y + 1.0f, initPos.z),
+                test.TreePrefab);
                 TreeGameObjects.Add(tempTree);
                 initPos = new Vector3(initPos.x + Tree.BaseWidth, initPos.y, initPos.z);
+                tempTree.transform.localScale /= 10.0f;
             }
 
             // this.transform.position += new Vector3(0, 2, 0);
