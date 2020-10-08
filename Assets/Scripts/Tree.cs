@@ -24,7 +24,7 @@ public class Tree : MonoBehaviour
     void Start()
     {
         transform.position = initPosition;
-        this.transform.position += new Vector3(0, 3, 0);
+        // this.transform.position += new Vector3(0, 3, 0);
         // Debug.Log("\t\t\t\t\t[Tree.Start()] >>> Generated Tree!");
     }
 

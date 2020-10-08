@@ -33,7 +33,7 @@ public class Valley : MonoBehaviour
                 initPos = new Vector3(initPos.x + Tree.BaseWidth, initPos.y, initPos.z);
             }
 
-            this.transform.position += new Vector3(0, 2, 0);
+            // this.transform.position += new Vector3(0, 2, 0);
             this.transform.localScale = new Vector3(this.transform.localScale.x * actualWidth, this.transform.localScale.y, this.transform.localScale.z);
 
         }
