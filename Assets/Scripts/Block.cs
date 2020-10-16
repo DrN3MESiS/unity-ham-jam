@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Block
 {
     public int id = 0;
     /* Properties */
@@ -11,59 +11,44 @@ public class Block : MonoBehaviour
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
-    public List<GameObject> MountainEntities = new List<GameObject>();
+    public List<Mountain> MountainEntities = new List<Mountain>();
     public int unitsLeft = 100;
-
-    /* Properties Setup */
-    public Block()
-    {
-
-    }
+    public GameObject block;
 
     /* UNITY METHODS */
-    void Start()
+    public Block()
     {
-        transform.position = startPosition;
-        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
+        this.block = new GameObject("Block");
+        this.startPosition = AppController.LastEnd;
 
         // int i = 0;
         // while (true)
         // {
 
         // }
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 10; i++)
         {
-            // GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition);
-
-            GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition, test.MountainSetTestPrefab, test.MountainEntryPrefab, test.MountainTopPrefab, test.MountainExitPrefab);
-            Mountain mountainScript = tempMountain.GetComponent<Mountain>();
+           Mountain mountainScript = new Mountain(this.block);
 
             if (unitsLeft - mountainScript.actualWidth < 0)
             {
-                Destroy(tempMountain);
                 break;
             }
 
             unitsLeft -= mountainScript.actualWidth;
-            MountainEntities.Add(tempMountain);
-
-            startPosition = new Vector3(startPosition.x + mountainScript.actualWidth, startPosition.y, startPosition.z);
+            MountainEntities.Add(mountainScript);
             // i++;
         }
-
-        /*Debug.Log("Mountains Generated: " + Entities.Count);
-        Debug.Log("Valley: " + CountOfValleys);*/
-
-        // this.transform.localScale += new Vector3(Mathf.Abs(unitsLeft - 100), 0, 0);
-        this.transform.localScale = new Vector3(this.transform.localScale.x * Mathf.Abs(unitsLeft - 100), transform.localScale.y, transform.localScale.z);
-        this.Draw();
     }
 
     public void Draw(){
-        foreach (GameObject entity in this.MountainEntities)
+        foreach (Mountain mountain in this.MountainEntities)
         {
-            Mountain mountain = entity.GetComponent<Mountain>();
             mountain.Draw();
+            // Debug.Log(mountain.valley);
+            // if(mountain.valley != null){
+            //     Debug.Log(mountain.valley.Trees.Count);
+            // }
         }
     }
 }

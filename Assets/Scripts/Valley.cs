@@ -2,48 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Valley : MonoBehaviour
+public class Valley
 {
     public int id = 0;
-    public Vector3 initPos;
-    public List<GameObject> TreeGameObjects = new List<GameObject>();
-
+    public List<Tree> Trees = new List<Tree>();
 
     public static float[] width = new float[2] { 3, 5 };
-    public float actualWidth = 0;
 
     // /* Properties Setup */
-    public Valley()
+    public Valley(int width, Transform parent)
     {
-
-    }
-
-    void Start()
-    {
-        transform.position = initPos;
-        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
-        if (actualWidth > 1)
+        int halfNumberOfTrees = IntUtil.Random(Tree.spawn[0], Tree.spawn[1]) / 2;
+        float distance = (float)DoubleUtil.Random(Tree.range[0], Tree.range[1]);
+        for (int i = -halfNumberOfTrees; i < halfNumberOfTrees; i++)
         {
-            int numberOfTrees = IntUtil.Random(1, (int)Mathf.Floor(actualWidth));
-            for (int i = 0; i < numberOfTrees; i++)
-            {
-                // GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i, initPos);
-                GameObject tempTree = ObjectGenerator.GenerateTree(this.gameObject, this.id, i,
-                new Vector3(initPos.x + 1.0f, initPos.y + 1.0f, initPos.z),
-                test.TreePrefab);
-                TreeGameObjects.Add(tempTree);
-                initPos = new Vector3(initPos.x + Tree.BaseWidth, initPos.y, initPos.z);
-                tempTree.transform.localScale /= 10.0f;
-            }
-
-            // this.transform.position += new Vector3(0, 2, 0);
-            this.transform.localScale = new Vector3(this.transform.localScale.x * actualWidth, this.transform.localScale.y, this.transform.localScale.z);
-
+            Tree tempTree = new Tree();
+            tempTree.Draw(i - (width / 2), parent);
+            Trees.Add(tempTree);
         }
-        else
-        {
-            Debug.LogError("[VALLEY] >> Width came as 0");
-        }
-
     }
 }

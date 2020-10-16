@@ -235,9 +235,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entry_Prefab: {fileID: 6120111501647756366, guid: a27a2f8cb06109e4fa99f21270529191,
     type: 3}
-  Top_Prefab: {fileID: 2966122128560914412, guid: 4b87206483107d143b466cf7b9c67d2a,
+  Top_Prefab: {fileID: 7731673529171839256, guid: aedd6283a2488ee4abea18334f92979f,
     type: 3}
   Exit_Prefab: {fileID: 3867428064751516953, guid: 53d33f5f4968d06488af6fd44addd476,
+    type: 3}
+  Tree_Prefab: {fileID: 8536564640959471285, guid: 5606b54265ca98242ac5ff9b4d00ef64,
+    type: 3}
+  Valley_Prefab: {fileID: 2966122128560914412, guid: 4b87206483107d143b466cf7b9c67d2a,
+    type: 3}
+  Ground_Prefab: {fileID: 9050272431162496030, guid: 6958cce89f17f6f45bbdcffea3c49784,
     type: 3}
   sprites:
   - {fileID: 0}
@@ -259,10 +265,6 @@ MonoBehaviour:
   MountainTopPrefab: {fileID: 6333303934432694308, guid: 7483a8d829df6cc46a512e70983713d6,
     type: 3}
   MountainExitPrefab: {fileID: 1545199513595237806, guid: c45c2421d9d863f408b808f34287320c,
-    type: 3}
-  ValleyPrefab: {fileID: 8495948151184830209, guid: be994e8b9db0c7f4ba3406c3e392baeb,
-    type: 3}
-  TreePrefab: {fileID: 8536564640959471285, guid: 5606b54265ca98242ac5ff9b4d00ef64,
     type: 3}
 --- !u!4 &1413968509
 Transform:
