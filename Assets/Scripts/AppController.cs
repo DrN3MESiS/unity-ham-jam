@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AppController : MonoBehaviour
 {    
-    public GameObject Entry_Prefab, Top_Prefab, Exit_Prefab, Tree_Prefab, Valley_Prefab, Ground_Prefab;
-    public static GameObject EntryPrefab, TopPrefab, ExitPrefab, TreePrefab, ValleyPrefab, GroundPrefab;
+    public GameObject Entry_Prefab, Top_Prefab, Exit_Prefab, Tree_Prefab, Valley_Prefab, Ground_Prefab, Bridge_Prefab;
+    public static GameObject EntryPrefab, TopPrefab, ExitPrefab, TreePrefab, ValleyPrefab, GroundPrefab, BridgePrefab;
     public static Vector3 LastEnd = Vector3.zero;
     public static float minHeight = -10;
     public static float spriteScale = 4.0f;
@@ -38,6 +38,7 @@ public class AppController : MonoBehaviour
         TreePrefab = Tree_Prefab;
         ValleyPrefab = Valley_Prefab;
         GroundPrefab = Ground_Prefab;
+        BridgePrefab = Bridge_Prefab;
 
         gameObject.tag = "Controller";
         StartCoroutine(GenerateGame());

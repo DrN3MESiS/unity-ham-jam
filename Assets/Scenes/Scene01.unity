@@ -245,27 +245,9 @@ MonoBehaviour:
     type: 3}
   Ground_Prefab: {fileID: 9050272431162496030, guid: 6958cce89f17f6f45bbdcffea3c49784,
     type: 3}
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  valleySprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Bridge_Prefab: {fileID: 2945906997103857384, guid: d4501d2258a4b8b4b916d17a3ddb1aa9,
+    type: 3}
   startReference: {x: 0, y: 0, z: 0}
-  BlockPrefab: {fileID: 4525826431520847713, guid: bb8c56e5b519be5499664c28240346f1,
-    type: 3}
-  MountainSetTestPrefab: {fileID: 6800131786255764478, guid: 3201e364c755d6144a0354ff4111bf4b,
-    type: 3}
-  MountainEntryPrefab: {fileID: 1545199513595237806, guid: c45c2421d9d863f408b808f34287320c,
-    type: 3}
-  MountainTopPrefab: {fileID: 6333303934432694308, guid: 7483a8d829df6cc46a512e70983713d6,
-    type: 3}
-  MountainExitPrefab: {fileID: 1545199513595237806, guid: c45c2421d9d863f408b808f34287320c,
-    type: 3}
 --- !u!4 &1413968509
 Transform:
   m_ObjectHideFlags: 0
