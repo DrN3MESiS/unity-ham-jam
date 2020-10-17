@@ -12,12 +12,15 @@ public class Valley
     // /* Properties Setup */
     public Valley(int width, Transform parent)
     {
-        int halfNumberOfTrees = IntUtil.Random(Tree.spawn[0], Tree.spawn[1]) / 2;
+        float halfNumberOfTrees = (float)IntUtil.Random(Tree.spawn[0], Tree.spawn[1] + 1) / 2.0f;
+        int min = (int)Mathf.Floor(halfNumberOfTrees);
+        int max = (int)Mathf.Ceil(halfNumberOfTrees);
         float distance = (float)DoubleUtil.Random(Tree.range[0], Tree.range[1]);
-        for (int i = -halfNumberOfTrees; i < halfNumberOfTrees; i++)
+        for (int i = -min; i < max; i++)
         {
             Tree tempTree = new Tree();
-            tempTree.Draw(i - (width / 2), parent);
+            // tempTree.Draw(i - (width / 2), parent);
+            tempTree.Draw((int)(((float)i * distance) - ((float)width / 2.0f)), parent);
             Trees.Add(tempTree);
         }
     }
