@@ -43,10 +43,9 @@ public class Mountain
         actualWidth = IntUtil.Random(widthRange[0], widthRange[1]);
         actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
-
-        topWidth = IntUtil.Random(1, actualWidth - 1);
-        entryWidth = IntUtil.Random(1, actualWidth - topWidth);
-        exitWidth = actualWidth - topWidth - entryWidth;
+        topWidth = IntUtil.Random(1, actualWidth + 1);
+        exitWidth = IntUtil.Random(0, actualWidth - topWidth + 1);
+        entryWidth = actualWidth - topWidth - exitWidth;
 
         entryHeight = IntUtil.Random(heightRange[0], actualHeight);
         exitHeight = IntUtil.Random(heightRange[0],actualHeight);
@@ -66,11 +65,13 @@ public class Mountain
         Vector3 pos = new Vector3(lastPos.x+(float)(entryWidth)/2.0f,lastPos.y+(float)(entryHeight)/2.0f,0);
         Vector3 scale = new Vector3((float)entryWidth/AppController.spriteScale,(float)entryHeight/AppController.spriteScale,1/AppController.spriteScale);
         
-        Entry = AppController.Draw(AppController.EntryPrefab, pos, scale, this.mountain.transform);
-        lastPos.x += this.entryWidth;
-        lastPos.y += this.entryHeight;
+        if(entryWidth != 0){
+            Entry = AppController.Draw(AppController.EntryPrefab, pos, scale, this.mountain.transform);
+            lastPos.x += this.entryWidth;
+            lastPos.y += this.entryHeight;
 
-        Ground(Entry.transform, (float)(entryWidth)/2.0f, 0);
+            Ground(Entry.transform, (float)(entryWidth)/2.0f, 0);
+        }
         AppController.LastEnd = lastPos;   
 
         pos = new Vector3(lastPos.x+(float)(topWidth)/2.0f,lastPos.y-(float)(entryHeight)/2.0f,0);
@@ -88,15 +89,17 @@ public class Mountain
 
         if(topIsValley){
             valley = new Valley(topWidth, Top.transform);
-        }        
+        }
 
-        pos = new Vector3(lastPos.x+(float)(exitWidth)/2.0f,lastPos.y-(float)(exitHeight)/2.0f,0);
-        scale = new Vector3((float)exitWidth/AppController.spriteScale,(float)exitHeight/AppController.spriteScale,1/AppController.spriteScale);
-        Exit = AppController.Draw(AppController.ExitPrefab, pos, scale, this.mountain.transform);
-        lastPos.x += this.exitWidth;
-        lastPos.y -= this.exitHeight;
+        if(exitWidth != 0){
+            pos = new Vector3(lastPos.x+(float)(exitWidth)/2.0f,lastPos.y-(float)(exitHeight)/2.0f,0);
+            scale = new Vector3((float)exitWidth/AppController.spriteScale,(float)exitHeight/AppController.spriteScale,1/AppController.spriteScale);
+            Exit = AppController.Draw(AppController.ExitPrefab, pos, scale, this.mountain.transform);
+            lastPos.x += this.exitWidth;
+            lastPos.y -= this.exitHeight;
 
-        Ground(Exit.transform, (float)(exitWidth)/2.0f, (float)(exitHeight));
+            Ground(Exit.transform, (float)(exitWidth)/2.0f, (float)(exitHeight));
+        }
         AppController.LastEnd = lastPos;
     }
     
