@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5411320075200646006
+--- !u!1 &6191602944262621934
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5411320075200646005}
-  - component: {fileID: 5411320075200646011}
-  - component: {fileID: 5411320075200646004}
+  - component: {fileID: 6191602944262621929}
+  - component: {fileID: 6191602944262621931}
+  - component: {fileID: 6191602944262621928}
   m_Layer: 0
-  m_Name: Top 1
+  m_Name: Entry 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5411320075200646005
+--- !u!4 &6191602944262621929
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5411320075200646006}
+  m_GameObject: {fileID: 6191602944262621934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2647424, y: -0.27072573, z: 1.655849}
+  m_LocalPosition: {x: -5.2647424, y: -0.27072573, z: 1.655849}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1971053207 &5411320075200646011
+--- !u!1971053207 &6191602944262621931
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5411320075200646006}
+  m_GameObject: {fileID: 6191602944262621934}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -80,15 +80,15 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: c65f57e72dce8eb43aa248df916ef8c8, type: 3}
   - {fileID: 21300000, guid: c65f57e72dce8eb43aa248df916ef8c8, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0, y: 0.20499969, z: -0.0001001}
-    m_Extent: {x: 2.0292656, y: 2.205, z: 0.0001001}
---- !u!114 &5411320075200646004
+    m_Center: {x: -0.020673275, y: 0.022328854, z: -0.00005005}
+    m_Extent: {x: 2.1152635, y: 2.1067162, z: 0.00005005}
+--- !u!114 &6191602944262621928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5411320075200646006}
+  m_GameObject: {fileID: 6191602944262621934}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
@@ -106,25 +106,16 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: -2, y: 2, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 1
-    - position: {x: 0, y: 2.25, z: 0}
-      leftTangent: {x: -0.67185485, y: -0, z: 0}
-      rightTangent: {x: 0.67185485, y: 0, z: -0}
+    - position: {x: -0.5, y: 0, z: 0}
+      leftTangent: {x: -0.70678043, y: -0.7123244, z: 0}
+      rightTangent: {x: 0.6239357, y: 0.62882936, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 2, y: 2, z: 0}
+    - position: {x: 2, y: 1.9999998, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
