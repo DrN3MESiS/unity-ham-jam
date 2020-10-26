@@ -7,7 +7,8 @@ public class Block
     public int id = 0;
     /* Properties */
     public Vector3 startPosition;
-    private int maxWidth = 100;
+
+    public int QuantityOfBridges = 0;
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
@@ -63,6 +64,7 @@ public class Block
                     }
                     Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance/2.0f)),height,0);
                     AppController.Draw(AppController.BridgePrefab, pos, AppController.BridgePrefab.transform.localScale, this.block.transform);
+                    QuantityOfBridges++;
                 }
             }
         }
