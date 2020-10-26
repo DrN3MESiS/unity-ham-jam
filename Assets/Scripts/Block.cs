@@ -9,7 +9,6 @@ public class Block
     public Vector3 startPosition;
 
     public int QuantityOfBridges = 0;
-    private int maxWidth = 100;
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */

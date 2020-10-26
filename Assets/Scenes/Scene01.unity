@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entry_Prefab: {fileID: 6120111501647756366, guid: a27a2f8cb06109e4fa99f21270529191,
     type: 3}
-  Top_Prefab: {fileID: 7731673529171839256, guid: aedd6283a2488ee4abea18334f92979f,
+  Top_Prefab: {fileID: 5411320075200646006, guid: 1dfafec87b668fb42a9e118f7b526e68,
     type: 3}
   Exit_Prefab: {fileID: 3867428064751516953, guid: 53d33f5f4968d06488af6fd44addd476,
     type: 3}
