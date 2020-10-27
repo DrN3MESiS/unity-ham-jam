@@ -40,9 +40,11 @@ public class EvalBlock: MonoBehaviour
 
             // Checking if there's exist a valley, and then checking if their valley has tree
 
-            if (Mountains[num].topIsValley){
-                mountainsWithValleys+=1.0f;
-                if(Mountains[num].valley.Trees.Count >= 3){
+            if (Mountains[num].topIsValley)
+            {
+                mountainsWithValleys += 1.0f;
+                if (Mountains[num].valley.Trees.Count >= 3)
+                {
                     valleysWith3Trees += 1.0f;
                 }
             }
@@ -52,7 +54,7 @@ public class EvalBlock: MonoBehaviour
         }
 
         int percentageOfValleys = (int)(mountainsWithValleys / (float)(Mountains.Count) * 100.0f);
-        
+
         // Checking the amount of valleys appearing in the mountains
 
         if (percentageOfValleys >= 80){
