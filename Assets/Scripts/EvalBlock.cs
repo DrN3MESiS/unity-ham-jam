@@ -150,9 +150,17 @@ public class EvalBlock
             Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es mayor a 10" + " (-1)");
         }
 
-        if (grade >= 3.0f)
+        if (grade >= 4.0f)
         {
-            Debug.Log("Good block ");
+            Debug.Log("The block is perfect");
+        }
+        else if (grade > 2.0f && grade < 4.0f)
+        {
+            Debug.Log("The block is regular");
+        }
+        else if (grade < 2.0f)
+        {
+            Debug.Log("The block is bad");
         }
     }
 }
