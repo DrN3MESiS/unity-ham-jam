@@ -111,5 +111,7 @@ public class EvalBlock: MonoBehaviour
         if (grade >= 3.0f){
             Debug.Log("Good block ");
         }
+
+        block.grade = grade;
     }
 }
