@@ -70,6 +70,7 @@ public class Mutate
         }
 
         Debug.Log("Count:" + TemporalBlockQueue.Count);
+        Debug.Log("Last Block Grade: " + TemporalBlockQueue[0].grade);
 
         Mutate.BlockQueue.Add(bestBlock);
     }
