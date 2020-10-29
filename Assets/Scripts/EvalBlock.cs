@@ -6,6 +6,7 @@ public class EvalBlock
 {
     public void BlockGrade(Block block)
     {
+        bool debug = false;
         float grade = 0.0f;
         Debug.Log("------------------------");
         List<Mountain> Mountains = block.MountainEntities;
@@ -55,17 +56,26 @@ public class EvalBlock
         if (maximumDiff <= 2.0f)
         {
             grade += 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es menor a 2" + " (+1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es menor a 2" + " (+1)");
+            }
         }
         else if (maximumDiff <= 4)
         {
             grade += 0.5f;
-            Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es mayor a 2 y menor a 4" + " (+0.5)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es mayor a 2 y menor a 4" + " (+0.5)");
+            }
         }
         else
         {
             grade -= 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es mayor a 4" + " (-1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: El cambio de alturas entre cada montaña es mayor a 4" + " (-1)");
+            }
         }
 
 
@@ -76,17 +86,26 @@ public class EvalBlock
         if (percentageOfValleys >= 80)
         {
             grade += 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 80% de las montañas tienen un valle" + " (+1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 80% de las montañas tienen un valle" + " (+1)");
+            }
         }
         else if (percentageOfValleys >= 60)
         {
             grade += 0.5f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 60% de las montañas tienen un valle" + " (+0.5)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 60% de las montañas tienen un valle" + " (+0.5)");
+            }
         }
         else
         {
             grade -= 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 20% de las montañas tienen un valle" + " (-1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 20% de las montañas tienen un valle" + " (-1)");
+            }
         }
 
 
@@ -97,17 +116,26 @@ public class EvalBlock
         if (percentageOfTreesInValleys >= 60)
         {
             grade += 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 60% de los valles generados tienen por lo menos 3 arboles" + " (+1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 60% de los valles generados tienen por lo menos 3 arboles" + " (+1)");
+            }
         }
         else if (percentageOfTreesInValleys >= 40)
         {
             grade += 0.5f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 40% de los valles generados tienen por lo menos 3 arboles" + " (+0.5)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 40% de los valles generados tienen por lo menos 3 arboles" + " (+0.5)");
+            }
         }
         else
         {
             grade -= 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 20% de los valles generados tienen por lo menos 3 arboles" + " (-1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Por lo menos el 20% de los valles generados tienen por lo menos 3 arboles" + " (-1)");
+            }
         }
 
         // Checking if there are bridges
@@ -115,17 +143,26 @@ public class EvalBlock
         if (block.QuantityOfBridges == 0)
         {
             grade += 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Hay 0 puentes" + " (+1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Hay 0 puentes" + " (+1)");
+            }
         }
         else if (block.QuantityOfBridges <= 2)
         {
             grade += 0.5f;
-            Debug.Log("Grade: " + grade + " | Reason: Hay menos de 2 puentes" + " (+0.5)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Hay menos de 2 puentes" + " (+0.5)");
+            }
         }
         else
         {
             grade -= 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: Hay mas de 3 puentes" + " (-1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: Hay mas de 3 puentes" + " (-1)");
+            }
         }
 
 
@@ -137,30 +174,44 @@ public class EvalBlock
         if (DiffStartEnd <= 5.0f)
         {
             grade += 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es menos de 5" + " (+1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es menos de 5" + " (+1)");
+            }
         }
         else if (DiffStartEnd <= 10.0f)
         {
             grade += 0.5f;
-            Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es menos de 10" + " (+0.5)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es menos de 10" + " (+0.5)");
+            }
         }
         else
         {
             grade -= 1.0f;
-            Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es mayor a 10" + " (-1)");
+            if (debug)
+            {
+                Debug.Log("Grade: " + grade + " | Reason: La diferencia de unidades entre montañas es mayor a 10" + " (-1)");
+            }
         }
 
-        if (grade >= 4.0f)
+        if (debug)
         {
-            Debug.Log("The block is perfect");
+            if (grade >= 4.0f)
+            {
+                Debug.Log("The block is perfect");
+            }
+            else if (grade > 2.0f && grade < 4.0f)
+            {
+                Debug.Log("The block is regular");
+            }
+            else if (grade < 2.0f)
+            {
+                Debug.Log("The block is bad");
+            }
         }
-        else if (grade > 2.0f && grade < 4.0f)
-        {
-            Debug.Log("The block is regular");
-        }
-        else if (grade < 2.0f)
-        {
-            Debug.Log("The block is bad");
-        }
+
+        block.grade = grade;
     }
 }

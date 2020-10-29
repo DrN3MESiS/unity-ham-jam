@@ -16,20 +16,16 @@ public class Block
     public int unitsLeft = 100;
     public GameObject block;
 
+    public float grade;
+
     /* UNITY METHODS */
     public Block()
     {
         this.block = new GameObject("Block");
         this.startPosition = AppController.LastEnd;
-
-        // int i = 0;
-        // while (true)
-        // {
-
-        // }
         for (int i = 0; i < 10; i++)
         {
-           Mountain mountainScript = new Mountain(this.block);
+            Mountain mountainScript = new Mountain(this.block);
 
             if (unitsLeft - mountainScript.actualWidth < 0)
             {
@@ -38,11 +34,12 @@ public class Block
 
             unitsLeft -= mountainScript.actualWidth;
             MountainEntities.Add(mountainScript);
-            // i++;
+
         }
     }
 
-    public void Draw(){
+    public void Draw()
+    {
         foreach (Mountain mountain in this.MountainEntities)
         {
             mountain.Draw();
@@ -52,17 +49,21 @@ public class Block
             // }
         }
 
-        for(int i = 0; i < this.MountainEntities.Count - 1; i++){
+        for (int i = 0; i < this.MountainEntities.Count - 1; i++)
+        {
             Mountain curr = this.MountainEntities[i];
-            Mountain next = this.MountainEntities[i+1];
-            if(curr.Exit != null && next.Entry != null){
+            Mountain next = this.MountainEntities[i + 1];
+            if (curr.Exit != null && next.Entry != null)
+            {
                 float distance = next.Entry.transform.position.x - curr.Exit.transform.position.x;
-                if(distance <= 1.0f){
+                if (distance <= 1.0f)
+                {
                     float height = curr.Exit.transform.position.y + (curr.exitHeight / 2.0f) - 0.25f;
-                    if(next.Entry.transform.position.y < height){
+                    if (next.Entry.transform.position.y < height)
+                    {
                         height = next.Entry.transform.position.y + (next.entryHeight / 2.0f) - 0.25f;
                     }
-                    Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance/2.0f)),height,0);
+                    Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance / 2.0f)), height, 0);
                     AppController.Draw(AppController.BridgePrefab, pos, AppController.BridgePrefab.transform.localScale, this.block.transform);
                     QuantityOfBridges++;
                 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AppController : MonoBehaviour
-{    
+{
     public GameObject Entry_Prefab, Top_Prefab, Exit_Prefab, Tree_Prefab, Valley_Prefab, Ground_Prefab, Bridge_Prefab;
     public static GameObject EntryPrefab, TopPrefab, ExitPrefab, TreePrefab, ValleyPrefab, GroundPrefab, BridgePrefab;
     public static Vector3 LastEnd = Vector3.zero;
@@ -15,11 +15,6 @@ public class AppController : MonoBehaviour
 
     IEnumerator GenerateGame()
     {
-        // int i = 0;
-        // while (true)
-        // {
-
-        // }
         EvalBlock eval = new EvalBlock();
         for (int i = 0; i < 5; i++)
         {
@@ -27,13 +22,12 @@ public class AppController : MonoBehaviour
             blockScript.Draw();
             BlockScripts.Add(blockScript);
             yield return new WaitForSeconds(2);
-            startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
-            // i++;
             eval.BlockGrade(blockScript);
         }
     }
     void Awake()
     {
+        Mutate test = new Mutate();
         EntryPrefab = Entry_Prefab;
         TopPrefab = Top_Prefab;
         ExitPrefab = Exit_Prefab;
@@ -43,11 +37,12 @@ public class AppController : MonoBehaviour
         BridgePrefab = Bridge_Prefab;
 
         gameObject.tag = "Controller";
-        StartCoroutine(GenerateGame());
+        // StartCoroutine(GenerateGame());
     }
 
-    public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent){
-        GameObject inst = Instantiate(prefab, pos, Quaternion.Euler(0,0,0));
+    public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)
+    {
+        GameObject inst = Instantiate(prefab, pos, Quaternion.Euler(0, 0, 0));
         inst.transform.localScale = scale;
         inst.transform.SetParent(parent);
 
