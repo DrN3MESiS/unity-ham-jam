@@ -13,15 +13,16 @@ public class Mountain
     public static int[] proximityRange = new int[2] { 0, 5 };
 
     /* Mountain Properties */
-    public int actualHeight;
-    public int actualWidth;
-    public int actualProximity;
+    public int actualHeight = 0;
+    public int actualWidth = 0;
+    public int actualProximity = 0;
 
-    public int topWidth;
-    public int entryWidth;
-    public int entryHeight;
-    public int exitWidth;
-    public int exitHeight;
+    public int topWidth = 0;
+    public int entryWidth = 0;
+    public int entryHeight = 0;
+    public int topHeight = 1;
+    public int exitWidth = 0;
+    public int exitHeight = 0;
 
     public bool topIsValley;
 
@@ -39,16 +40,21 @@ public class Mountain
         this.mountain.transform.SetParent(block.transform);
         this.startPosition = AppController.LastEnd;
 
-        actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
-        actualWidth = IntUtil.Random(widthRange[0], widthRange[1]);
-        actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
+        this.actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
+        this.actualWidth = IntUtil.Random(widthRange[0], widthRange[1]);
+        this.actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
-        topWidth = IntUtil.Random(1, actualWidth + 1);
-        exitWidth = IntUtil.Random(0, actualWidth - topWidth + 1);
-        entryWidth = actualWidth - topWidth - exitWidth;
+        this.topWidth = IntUtil.Random(1, this.actualWidth + 1);
+        this.exitWidth = IntUtil.Random(0, this.actualWidth - this.topWidth + 1);
+        this.entryWidth = this.actualWidth - this.topWidth - this.exitWidth;
 
-        entryHeight = IntUtil.Random(heightRange[0], actualHeight);
-        exitHeight = IntUtil.Random(heightRange[0],actualHeight);
+        if(this.entryWidth != 0){
+            this.entryHeight = IntUtil.Random(heightRange[0], this.actualHeight);
+            this.topHeight = this.entryHeight;
+        }
+        if(this.exitWidth != 0){
+            this.exitHeight = IntUtil.Random(heightRange[0],this.actualHeight);
+        }
 
         if (topWidth > Valley.width[0])
         {
@@ -60,22 +66,32 @@ public class Mountain
         }
     }
 
+    public void Mutate(float noice){
+        double factor = DoubleUtil.Random(noice, 1+noice);
+
+        this.entryWidth = (int)(this.entryWidth * factor);
+        this.entryHeight = (int)(this.entryHeight * factor);
+        this.topWidth = (int)(this.topWidth * factor);
+        this.exitWidth = (int)(this.exitWidth * factor);
+        this.exitHeight = (int)(this.exitHeight * factor);
+    }
+
     public void Draw(){
         Vector3 lastPos = AppController.LastEnd;
-        Vector3 pos = new Vector3(lastPos.x+(float)(entryWidth)/2.0f,lastPos.y+(float)(entryHeight)/2.0f,0);
-        Vector3 scale = new Vector3((float)entryWidth/AppController.spriteScale,(float)entryHeight/AppController.spriteScale,1/AppController.spriteScale);
+        Vector3 pos = new Vector3(lastPos.x+(float)(this.entryWidth)/2.0f,lastPos.y+(float)(this.entryHeight)/2.0f,0);
+        Vector3 scale = new Vector3((float)this.entryWidth/AppController.spriteScale,(float)this.entryHeight/AppController.spriteScale,1/AppController.spriteScale);
         
-        if(entryWidth != 0){
+        if(this.entryWidth != 0){
             Entry = AppController.Draw(AppController.EntryPrefab, pos, scale, this.mountain.transform);
             lastPos.x += this.entryWidth;
             lastPos.y += this.entryHeight;
 
-            Ground(Entry.transform, (float)(entryWidth)/2.0f, 0);
+            Ground(Entry.transform, (float)(this.entryWidth)/2.0f, 0);
         }
         AppController.LastEnd = lastPos;   
 
-        pos = new Vector3(lastPos.x+(float)(topWidth)/2.0f,lastPos.y-(float)(entryHeight)/2.0f,0);
-        scale = new Vector3((float)topWidth/AppController.spriteScale,(float)entryHeight/AppController.spriteScale,1/AppController.spriteScale);
+        pos = new Vector3(lastPos.x+(float)(this.topWidth)/2.0f,lastPos.y-(float)(this.topHeight)/2.0f,0);
+        scale = new Vector3((float)this.topWidth/AppController.spriteScale,(float)this.topHeight/AppController.spriteScale,1/AppController.spriteScale);
         
         GameObject topPrefab = AppController.TopPrefab;
         if(topIsValley){
@@ -84,21 +100,21 @@ public class Mountain
         Top = AppController.Draw(topPrefab, pos, scale, this.mountain.transform);
         lastPos.x += this.topWidth;        
         
-        Ground(Top.transform, (float)(topWidth)/2.0f, (float)(entryHeight));
+        Ground(Top.transform, (float)(this.topWidth)/2.0f, (float)(this.topHeight));
         AppController.LastEnd = lastPos;
 
         if(topIsValley){
-            valley = new Valley(topWidth, Top.transform);
+            valley = new Valley(this.topWidth, Top.transform);
         }
 
-        if(exitWidth != 0){
-            pos = new Vector3(lastPos.x+(float)(exitWidth)/2.0f,lastPos.y-(float)(exitHeight)/2.0f,0);
-            scale = new Vector3((float)exitWidth/AppController.spriteScale,(float)exitHeight/AppController.spriteScale,1/AppController.spriteScale);
+        if(this.exitWidth != 0){
+            pos = new Vector3(lastPos.x+(float)(this.exitWidth)/2.0f,lastPos.y-(float)(this.exitHeight)/2.0f,0);
+            scale = new Vector3((float)this.exitWidth/AppController.spriteScale,(float)this.exitHeight/AppController.spriteScale,1/AppController.spriteScale);
             Exit = AppController.Draw(AppController.ExitPrefab, pos, scale, this.mountain.transform);
             lastPos.x += this.exitWidth;
             lastPos.y -= this.exitHeight;
 
-            Ground(Exit.transform, (float)(exitWidth)/2.0f, (float)(exitHeight));
+            Ground(Exit.transform, (float)(this.exitWidth)/2.0f, (float)(this.exitHeight));
         }
         AppController.LastEnd = lastPos;
     }
