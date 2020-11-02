@@ -42,6 +42,13 @@ public class Block
         }
     }
 
+    public void Mutate(float noice){
+        foreach (Mountain mountain in this.MountainEntities)
+        {
+            mountain.Mutate(noice);
+        }
+    }
+
     public void Draw(){
         foreach (Mountain mountain in this.MountainEntities)
         {
@@ -59,7 +66,7 @@ public class Block
                 float distance = next.Entry.transform.position.x - curr.Exit.transform.position.x;
                 if(distance <= 1.0f){
                     float height = curr.Exit.transform.position.y + (curr.exitHeight / 2.0f) - 0.25f;
-                    if(next.Entry.transform.position.y < height){
+                    if(next.Entry.transform.position.y < curr.Exit.transform.position.y){
                         height = next.Entry.transform.position.y + (next.entryHeight / 2.0f) - 0.25f;
                     }
                     Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance/2.0f)),height,0);
