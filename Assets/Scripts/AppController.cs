@@ -20,7 +20,6 @@ public class AppController : MonoBehaviour
         // {
 
         // }
-        EvalBlock eval = new EvalBlock();
         for (int i = 0; i < 5; i++)
         {
             Block blockScript = new Block();
@@ -29,7 +28,7 @@ public class AppController : MonoBehaviour
             yield return new WaitForSeconds(2);
             startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
             // i++;
-            eval.BlockGrade(blockScript);
+            blockScript.block.AddComponent<EvalBlock>().BlockGrade(blockScript);
         }
     }
     void Awake()
