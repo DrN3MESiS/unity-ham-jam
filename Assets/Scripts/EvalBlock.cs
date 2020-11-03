@@ -43,7 +43,7 @@ public class EvalBlock: MonoBehaviour
             if (Mountains[num].topIsValley)
             {
                 mountainsWithValleys += 1.0f;
-                if (Mountains[num].valley.Trees.Count >= 3)
+                if (Mountains[num].valley.noTrees >= 3)
                 {
                     valleysWith3Trees += 1.0f;
                 }
