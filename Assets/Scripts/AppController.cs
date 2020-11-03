@@ -15,14 +15,13 @@ public class AppController : MonoBehaviour
 
     IEnumerator GenerateGame()
     {
-        EvalBlock eval = new EvalBlock();
         for (int i = 0; i < 5; i++)
         {
             Block blockScript = new Block();
             blockScript.Draw();
             BlockScripts.Add(blockScript);
             yield return new WaitForSeconds(2);
-            eval.BlockGrade(blockScript);
+            blockScript.block.AddComponent<EvalBlock>().BlockGrade(blockScript);
         }
     }
     void Awake()
