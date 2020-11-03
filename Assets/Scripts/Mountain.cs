@@ -59,6 +59,7 @@ public class Mountain
         if (topWidth > Valley.width[0])
         {
             topIsValley = true;
+            valley = new Valley();
         }
         else
         {
@@ -104,7 +105,7 @@ public class Mountain
         AppController.LastEnd = lastPos;
 
         if(topIsValley){
-            valley = new Valley(this.topWidth, Top.transform);
+            valley.Draw(this.topWidth, Top.transform);
         }
 
         if(this.exitWidth != 0){
