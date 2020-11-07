@@ -33,7 +33,7 @@ public class AppController : MonoBehaviour
     }
     void Awake()
     {
-        Mutate test = new Mutate();
+        // Mutate test = new Mutate();
         EntryPrefab = Entry_Prefab;
         TopPrefab = Top_Prefab;
         ExitPrefab = Exit_Prefab;

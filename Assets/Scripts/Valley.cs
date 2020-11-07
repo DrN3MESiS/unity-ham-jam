@@ -11,7 +11,10 @@ public class Valley
     public int noTrees = 0;
 
     public Valley(){
-        noTrees = IntUtil.Random(Tree.spawn[0], Tree.spawn[1] + 1);
+        this.noTrees = IntUtil.Random(Tree.spawn[0], Tree.spawn[1] + 1);
+    }
+    public Valley(int noTrees){
+        this.noTrees = noTrees;
     }
 
     // /* Properties Setup */
