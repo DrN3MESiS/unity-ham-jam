@@ -10,12 +10,10 @@ public class Mountain
     /* Range Properties */
     public static int[] heightRange = new int[2] { 1, 5 };
     public static int[] widthRange = new int[2] { 6, 10 };
-    public static int[] proximityRange = new int[2] { 0, 5 };
 
     /* Mountain Properties */
     public int actualHeight = 0;
     public int actualWidth = 0;
-    public int actualProximity = 0;
 
     public int topWidth = 0;
     public int entryWidth = 0;
@@ -34,15 +32,12 @@ public class Mountain
     public GameObject mountain;
 
     /* Properties Setup */
-    public Mountain(GameObject block)
+    public Mountain()
     {
-        this.mountain = new GameObject("Mountain");
-        this.mountain.transform.SetParent(block.transform);
         this.startPosition = AppController.LastEnd;
 
         this.actualHeight = IntUtil.Random(heightRange[0], heightRange[1]);
         this.actualWidth = IntUtil.Random(widthRange[0], widthRange[1]);
-        this.actualProximity = IntUtil.Random(proximityRange[0], proximityRange[1]);
 
         this.topWidth = IntUtil.Random(1, this.actualWidth + 1);
         this.exitWidth = IntUtil.Random(0, this.actualWidth - this.topWidth + 1);
@@ -67,17 +62,28 @@ public class Mountain
         }
     }
 
-    public void Mutate(float noice){
+    public Mountain Mutate(float noice){
+        Mountain mutation = new Mountain();
         double factor = DoubleUtil.Random(noice, 1+noice);
 
-        this.entryWidth = (int)(this.entryWidth * factor);
-        this.entryHeight = (int)(this.entryHeight * factor);
-        this.topWidth = (int)(this.topWidth * factor);
-        this.exitWidth = (int)(this.exitWidth * factor);
-        this.exitHeight = (int)(this.exitHeight * factor);
+        mutation.entryHeight = Mathf.Clamp((int)(this.entryHeight * factor), heightRange[0], heightRange[1]);
+        // mutation.entryWidth = (int)(this.entryWidth * factor);
+        // mutation.topWidth = (int)(this.topWidth * factor);
+        // mutation.exitWidth = (int)(this.exitWidth * factor);
+        factor = DoubleUtil.Random(noice, 1+noice);
+        mutation.exitHeight = Mathf.Clamp((int)(this.exitHeight * factor), heightRange[0], heightRange[1]);  
+
+        if (this.topWidth > Valley.width[0])
+        {
+            factor = DoubleUtil.Random(noice, 1+noice);            ;
+            mutation.valley = new Valley(Mathf.Clamp((int)(this.valley.noTrees * factor),Tree.spawn[0],Tree.spawn[1]));
+        }
+        return mutation;
     }
 
-    public void Draw(){
+    public void Draw(GameObject block){        
+        this.mountain = new GameObject("Mountain");
+        this.mountain.transform.SetParent(block.transform);
         Vector3 lastPos = AppController.LastEnd;
         Vector3 pos = new Vector3(lastPos.x+(float)(this.entryWidth)/2.0f,lastPos.y+(float)(this.entryHeight)/2.0f,0);
         Vector3 scale = new Vector3((float)this.entryWidth/AppController.spriteScale,(float)this.entryHeight/AppController.spriteScale,1/AppController.spriteScale);

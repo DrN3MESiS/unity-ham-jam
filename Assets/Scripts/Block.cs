@@ -21,11 +21,10 @@ public class Block
     /* UNITY METHODS */
     public Block()
     {
-        this.block = new GameObject("Block");
         this.startPosition = AppController.LastEnd;
         for (int i = 0; i < 10; i++)
         {
-            Mountain mountainScript = new Mountain(this.block);
+            Mountain mountainScript = new Mountain();
 
             if (unitsLeft - mountainScript.actualWidth < 0)
             {
@@ -38,21 +37,24 @@ public class Block
         }
     }
 
-    public void Mutate(float noice){
-        foreach (Mountain mountain in this.MountainEntities)
+    public Block Mutate(float noice){
+        Block mutation = new Block();
+        mutation.MountainEntities = this.MountainEntities;
+        for (int i = 0; i < this.MountainEntities.Count; i++)
         {
-            mountain.Mutate(noice);
-        }
+            mutation.MountainEntities[i] = this.MountainEntities[i].Mutate(noice);
+        }        
+        EvalBlock eval = new EvalBlock();
+        eval.BlockGrade(mutation);
+        // mutation.block.AddComponent<EvalBlock>().BlockGrade(mutation);
+        return mutation;
     }
 
     public void Draw(){
+        this.block = new GameObject("Block");
         foreach (Mountain mountain in this.MountainEntities)
         {
-            mountain.Draw();
-            // Debug.Log(mountain.valley);
-            // if(mountain.valley != null){
-            //     Debug.Log(mountain.valley.Trees.Count);
-            // }
+            mountain.Draw(this.block);
         }
 
         for (int i = 0; i < this.MountainEntities.Count - 1; i++)
