@@ -46,7 +46,6 @@ public class Block
         }        
         EvalBlock eval = new EvalBlock();
         eval.BlockGrade(mutation);
-        // mutation.block.AddComponent<EvalBlock>().BlockGrade(mutation);
         return mutation;
     }
 

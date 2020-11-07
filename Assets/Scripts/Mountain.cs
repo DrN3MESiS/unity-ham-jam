@@ -64,18 +64,21 @@ public class Mountain
 
     public Mountain Mutate(float noice){
         Mountain mutation = new Mountain();
-        double factor = DoubleUtil.Random(noice, 1+noice);
-
+        double factor = DoubleUtil.Random(1-noice, 1+noice);
         mutation.entryHeight = Mathf.Clamp((int)(this.entryHeight * factor), heightRange[0], heightRange[1]);
-        // mutation.entryWidth = (int)(this.entryWidth * factor);
-        // mutation.topWidth = (int)(this.topWidth * factor);
-        // mutation.exitWidth = (int)(this.exitWidth * factor);
-        factor = DoubleUtil.Random(noice, 1+noice);
-        mutation.exitHeight = Mathf.Clamp((int)(this.exitHeight * factor), heightRange[0], heightRange[1]);  
+        factor = DoubleUtil.Random(1-noice, 1+noice);
+        mutation.exitHeight = Mathf.Clamp((int)(this.exitHeight * factor), heightRange[0], heightRange[1]); 
+
+        // mutation.actualHeight = this.actualHeight;
+        // mutation.actualWidth = this.actualWidth;
+        // factor = DoubleUtil.Random(1-noice, 1+noice);
+        // mutation.topWidth = Mathf.Clamp((int)(this.topWidth * factor), widthRange[0], widthRange[1]);
+        // mutation.exitWidth = IntUtil.Random(0, mutation.actualWidth - mutation.topWidth + 1);
+        // mutation.entryWidth = mutation.actualWidth - mutation.topWidth - mutation.exitWidth;
 
         if (this.topWidth > Valley.width[0])
         {
-            factor = DoubleUtil.Random(noice, 1+noice);            ;
+            factor = DoubleUtil.Random(1-noice, 1+noice);            ;
             mutation.valley = new Valley(Mathf.Clamp((int)(this.valley.noTrees * factor),Tree.spawn[0],Tree.spawn[1]));
         }
         return mutation;

@@ -15,15 +15,7 @@ public class PCG: MonoBehaviour
             BlockScripts.Add(blockScript);
             EvalBlock eval = new EvalBlock();
             eval.BlockGrade(blockScript);
-            // Debug.Log(blockScript.grade);
         }
-
-        // Debug.Log("Initial");
-        // BlockScripts.Sort((x,y) => y.grade.CompareTo(x.grade));
-        // foreach (Block block in BlockScripts)
-        // {
-        //     Debug.Log(block.grade);
-        // } 
 
         for (int noMutation = 0; noMutation < noMutations; noMutation++)
         {
@@ -33,17 +25,10 @@ public class PCG: MonoBehaviour
                 BlockScripts[BlockScripts.Count - 1 - i] =  BlockScripts[i].Mutate(noice);
             }          
         }
-        Debug.Log("Final");
         BlockScripts.Sort((x,y) => y.grade.CompareTo(x.grade));
-        // foreach (Block block in BlockScripts)
-        // {
-        //     Debug.Log(block.grade);
-        // } 
 
-        // Debug.Log("Chosen");
         for (int i = 0; i < 5; i++)
         {
-            // Debug.Log(BlockScripts[i].grade);
             BlockScripts[i].Draw();
             BlockScripts[i].block.AddComponent<EvalBlock>().BlockGrade(BlockScripts[i]);
         }
