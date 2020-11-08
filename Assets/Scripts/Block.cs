@@ -25,6 +25,7 @@ public class Block
         for (int i = 0; i < 10; i++)
         {
             Mountain mountainScript = new Mountain();
+            mountainScript.SetMountainProperties();
 
             if (unitsLeft - mountainScript.actualWidth < 0)
             {
@@ -39,11 +40,11 @@ public class Block
 
     public Block Mutate(float noice){
         Block mutation = new Block();
-        mutation.MountainEntities = this.MountainEntities;
-        for (int i = 0; i < this.MountainEntities.Count; i++)
+        mutation.MountainEntities = new List<Mountain>();
+        foreach (Mountain mountain in this.MountainEntities)
         {
-            mutation.MountainEntities[i] = this.MountainEntities[i].Mutate(noice);
-        }        
+            mutation.MountainEntities.Add(mountain.Mutate(noice));            
+        }    
         EvalBlock eval = new EvalBlock();
         eval.BlockGrade(mutation);
         return mutation;

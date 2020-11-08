@@ -22,17 +22,16 @@ public class Mountain
     public int exitWidth = 0;
     public int exitHeight = 0;
 
-    public bool topIsValley;
+    public bool topIsValley = false;
 
     public GameObject Entry;
     public GameObject Top;
     public GameObject Exit;
     public Valley valley;
 
-    public GameObject mountain;
-
+    public GameObject mountain;    
     /* Properties Setup */
-    public Mountain()
+    public void SetMountainProperties()
     {
         this.startPosition = AppController.LastEnd;
 
@@ -56,10 +55,6 @@ public class Mountain
             topIsValley = true;
             valley = new Valley();
         }
-        else
-        {
-            topIsValley = false;
-        }
     }
 
     public Mountain Mutate(float noice){
@@ -69,15 +64,21 @@ public class Mountain
         factor = DoubleUtil.Random(1-noice, 1+noice);
         mutation.exitHeight = Mathf.Clamp((int)(this.exitHeight * factor), heightRange[0], heightRange[1]); 
 
+        mutation.topWidth = this.topWidth;
+        mutation.exitWidth = this.exitWidth;
+        mutation.entryWidth = this.entryWidth;
         // mutation.actualHeight = this.actualHeight;
         // mutation.actualWidth = this.actualWidth;
         // factor = DoubleUtil.Random(1-noice, 1+noice);
         // mutation.topWidth = Mathf.Clamp((int)(this.topWidth * factor), widthRange[0], widthRange[1]);
-        // mutation.exitWidth = IntUtil.Random(0, mutation.actualWidth - mutation.topWidth + 1);
-        // mutation.entryWidth = mutation.actualWidth - mutation.topWidth - mutation.exitWidth;
+        // factor = DoubleUtil.Random(1-noice, 1+noice);
+        // mutation.exitWidth = Mathf.Clamp((int)(this.exitWidth * factor), widthRange[0], widthRange[1]);
+        // factor = DoubleUtil.Random(1-noice, 1+noice);
+        // mutation.entryWidth = Mathf.Clamp((int)(this.entryWidth * factor), widthRange[0], widthRange[1]);
 
-        if (this.topWidth > Valley.width[0])
+        if (mutation.topWidth > Valley.width[0])
         {
+            mutation.topIsValley = true;
             factor = DoubleUtil.Random(1-noice, 1+noice);            ;
             mutation.valley = new Valley(Mathf.Clamp((int)(this.valley.noTrees * factor),Tree.spawn[0],Tree.spawn[1]));
         }
