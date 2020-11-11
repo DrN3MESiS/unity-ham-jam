@@ -11,8 +11,8 @@ public class AppController : MonoBehaviour
     public static float spriteScale = 4.0f;
     List<Block> BlockScripts = new List<Block>();
 
-    public Vector3 startReference = new Vector3(0, 0, 0);
 
+    Mutate mutator = null;
     IEnumerator GenerateGame()
     {
         // int i = 0;
@@ -33,7 +33,8 @@ public class AppController : MonoBehaviour
     }
     void Awake()
     {
-        // Mutate test = new Mutate();
+        mutator = new Mutate();
+
         EntryPrefab = Entry_Prefab;
         TopPrefab = Top_Prefab;
         ExitPrefab = Exit_Prefab;
@@ -43,7 +44,12 @@ public class AppController : MonoBehaviour
         BridgePrefab = Bridge_Prefab;
 
         gameObject.tag = "Controller";
-        // StartCoroutine(GenerateGame());
+        gameObject.AddComponent<Mutate>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(GenerateGame());
     }
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)
