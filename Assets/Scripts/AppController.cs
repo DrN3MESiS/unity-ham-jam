@@ -15,13 +15,17 @@ public class AppController : MonoBehaviour
     Mutate mutator = null;
     IEnumerator GenerateGame()
     {
-        Debug.Log("[GAME] Obtaining Block");
-        Block curBlock = Mutate.BlockQueue.Dequeue();
-        BlockScripts.Add(curBlock);
-        curBlock.Draw();
-        curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
+        while (true)
+        {
+            Block curBlock = Mutate.BlockQueue.Dequeue();
+            BlockScripts.Add(curBlock);
+            curBlock.Draw();
+            Debug.Log("[GAME] >>>>>>> P1 Rendered and Obtained Block with Grade: " + curBlock.grade);
+            // curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
+            // Debug.Log("[GAME] >>>>>>> P2 Rendered and Obtained Block with Grade: " + curBlock.grade);
 
-        yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(10f);
+        }
     }
     void Awake()
     {

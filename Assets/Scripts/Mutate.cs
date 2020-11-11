@@ -17,32 +17,37 @@ public class Mutate : MonoBehaviour
 
     IEnumerator WatchState()
     {
-        Debug.Log("[MUTATOR] Watching Queue...");
-        //Checks public block list length
-        if (Mutate.BlockQueue.Count < 3)
+        while (true)
         {
-            currentState = MutateListState.GENERATE;
-            Debug.Log("[MUTATOR] Changed state to: GENERATE");
-        }
-        else if (Mutate.BlockQueue.Count == 3)
-        {
-            currentState = MutateListState.FULL;
-            Debug.Log("[MUTATOR] Changed state to: FULL");
-        }
-
-        //Based on State, an action is determined
-
-        if (currentState == MutateListState.GENERATE)
-        {
-            Debug.Log("[MUTATOR] Started Action: Re-Populate Queue");
-            for (int i = 0; i < 3 - Mutate.BlockQueue.Count; i++)
+            //Checks public block list length
+            if (Mutate.BlockQueue.Count < 3)
             {
-                GenerateMutateAndRelease();
+                currentState = MutateListState.GENERATE;
+                Debug.Log("[MUTATOR] Changed state to: GENERATE");
             }
-            Debug.Log("[MUTATOR] Completed Action: Re-Populate Queue");
-        }
+            else if (Mutate.BlockQueue.Count == 3)
+            {
+                if (currentState != MutateListState.FULL)
+                {
+                    Debug.Log("[MUTATOR] Changed state to: FULL");
+                }
+                currentState = MutateListState.FULL;
+            }
 
-        yield return new WaitForSeconds(1);
+            //Based on State, an action is determined
+
+            if (currentState == MutateListState.GENERATE)
+            {
+                Debug.Log("[MUTATOR] Started Action: Re-Populate Queue");
+                for (int i = 0; i < 3 - Mutate.BlockQueue.Count; i++)
+                {
+                    GenerateMutateAndRelease();
+                }
+                Debug.Log("[MUTATOR] Completed Action: Re-Populate Queue");
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
     }
     private void Awake()
     {
@@ -51,6 +56,10 @@ public class Mutate : MonoBehaviour
         GenerateMutateAndRelease();
         GenerateMutateAndRelease();
         Debug.Log("[MUTATOR] Completed Action: Populate Initial Queue");
+    }
+
+    private void Start()
+    {
         Debug.Log("[MUTATOR] Started Action: Start Watch Function");
         StartCoroutine(WatchState());
         Debug.Log("[MUTATOR] Completed Action: Start Watch Function");
@@ -77,6 +86,7 @@ public class Mutate : MonoBehaviour
         }
 
         bestBlock = TemporalBlockQueue[TemporalBlockQueue.Count - 1];
+        Debug.Log("[MUTATOR] ===================== ADDED TO QUEUE BLOCK G: " + bestBlock.grade);
         Mutate.BlockQueue.Enqueue(bestBlock);
     }
 
