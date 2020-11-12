@@ -2,57 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Block
 {
     public int id = 0;
     /* Properties */
     public Vector3 startPosition;
-    private int maxWidth = 100;
+
+    public int QuantityOfBridges = 0;
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
 
     /*  */
-    public List<GameObject> MountainEntities = new List<GameObject>();
+    public List<Mountain> MountainEntities = new List<Mountain>();
     public int unitsLeft = 100;
+    public GameObject block;
 
-    /* Properties Setup */
-    public Block()
-    {
-
-    }
+    public float grade;
 
     /* UNITY METHODS */
-    void Start()
+    public Block()
     {
-        transform.position = startPosition;
-        AppController test = GameObject.FindGameObjectWithTag("Controller").GetComponent<AppController>();
-
-        // int i = 0;
-        // while (true)
-        // {
-
-        // }
-        for (int i = 0; i < 1; i++)
+        this.startPosition = AppController.LastEnd;
+        for (int i = 0; i < 10; i++)
         {
-            // GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition);
-
-            GameObject tempMountain = ObjectGenerator.GenerateMountain(this.gameObject, id, i, startPosition, test.MountainSetTestPrefab, test.MountainEntryPrefab, test.MountainTopPrefab, test.MountainExitPrefab);
-            Mountain mountainScript = tempMountain.GetComponent<Mountain>();
+            Mountain mountainScript = new Mountain();
+            mountainScript.SetMountainProperties();
 
             if (unitsLeft - mountainScript.actualWidth < 0)
             {
-                Destroy(tempMountain);
                 break;
             }
 
             unitsLeft -= mountainScript.actualWidth;
-            MountainEntities.Add(tempMountain);
+            MountainEntities.Add(mountainScript);
 
-            startPosition = new Vector3(startPosition.x + mountainScript.actualWidth, startPosition.y, startPosition.z);
-            // i++;
+        }
+    }
+
+    public Block Mutate(float noice){
+        Block mutation = new Block();
+        mutation.MountainEntities = new List<Mountain>();
+        foreach (Mountain mountain in this.MountainEntities)
+        {
+            mutation.MountainEntities.Add(mountain.Mutate(noice));            
+        }    
+        EvalBlock eval = new EvalBlock();
+        eval.BlockGrade(mutation);
+        return mutation;
+    }
+
+    public void Draw(){
+        this.block = new GameObject("Block");
+        foreach (Mountain mountain in this.MountainEntities)
+        {
+            mountain.Draw(this.block);
         }
 
-
-        // this.transform.localScale += new Vector3(Mathf.Abs(unitsLeft - 100), 0, 0);
-        this.transform.localScale = new Vector3(this.transform.localScale.x * Mathf.Abs(unitsLeft - 100), transform.localScale.y, transform.localScale.z);
+        for (int i = 0; i < this.MountainEntities.Count - 1; i++)
+        {
+            Mountain curr = this.MountainEntities[i];
+            Mountain next = this.MountainEntities[i + 1];
+            if (curr.Exit != null && next.Entry != null)
+            {
+                float distance = next.Entry.transform.position.x - curr.Exit.transform.position.x;
+                if (distance <= 1.0f)
+                {
+                    float height = curr.Exit.transform.position.y + (curr.exitHeight / 2.0f) - 0.25f;
+                    if(next.Entry.transform.position.y < curr.Exit.transform.position.y){
+                        height = next.Entry.transform.position.y + (next.entryHeight / 2.0f) - 0.25f;
+                    }
+                    Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance / 2.0f)), height, 0);
+                    AppController.Draw(AppController.BridgePrefab, pos, AppController.BridgePrefab.transform.localScale, this.block.transform);
+                    QuantityOfBridges++;
+                }
+            }
+        }
     }
 }
