@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ public class AppController : MonoBehaviour
     public static Vector3 LastEnd = Vector3.zero;
     public static float minHeight = -10;
     public static float spriteScale = 4.0f;
-    List<Block> BlockScripts = new List<Block>();
-
-
+    Queue<Block> BlockScripts = new Queue<Block>();
+    public static GameObject player;
+    public Block curBlock;
     Mutate mutator = null;
     IEnumerator GenerateGame()
     {
@@ -45,12 +46,33 @@ public class AppController : MonoBehaviour
 
         gameObject.tag = "Controller";
         gameObject.AddComponent<Mutate>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        Block respawn = new Block();
+        respawn.block = GameObject.FindGameObjectWithTag("Respawn");
+        BlockScripts.Enqueue(respawn);
     }
 
     private void Start()
     {
-        StartCoroutine(GenerateGame());
+        GenerateBlock();
+    }
 
+    private void Update() {
+        if(curBlock != null){
+            if(curBlock.HasPlayerPassed(player.transform.position)){
+                Destroy(BlockScripts.Dequeue().block);
+                GenerateBlock();
+            }
+        }
+    }
+
+    public void GenerateBlock(){
+        curBlock = Mutate.BlockQueue.Dequeue();
+        BlockScripts.Enqueue(curBlock);
+        curBlock.Draw();        
+        // Debug.Log("[GAME] >>>>>>> P1 Rendered and Obtained Block with Grade: " + curBlock.grade);
+        curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
+        // Debug.Log("[GAME] >>>>>>> P2 Rendered and Obtained Block with Grade: " + curBlock.grade);
     }
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)
