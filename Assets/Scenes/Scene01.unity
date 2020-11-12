@@ -252,12 +252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b3df3ef3439db4a9b50d927d0068ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveBackwards: 97
-  MoveForward: 115
+  MoveBackwards: 115
+  MoveForward: 119
   Jump: 32
   realSpeed: -50
   jumpForce: 50
   isGrounded: 0
+  curVelocity: 0
 --- !u!1 &1158009565
 GameObject:
   m_ObjectHideFlags: 0

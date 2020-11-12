@@ -31,9 +31,10 @@ public class User : MonoBehaviour
             rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
         }
 
-        if (Input.GetKeyDown(Jump))
+        if (Input.GetKey(Jump))
         {
             rb.AddForce(Vector2.up * jumpForce * Time.fixedDeltaTime);
+            Debug.Log("Pressed SPACE");
         }
 
     }
