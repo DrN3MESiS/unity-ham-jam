@@ -33,7 +33,7 @@ public class User : MonoBehaviour
 
         if (Input.GetKeyDown(Jump))
         {
-            rb.AddForce(Vector2.up * jumpForce);
+            rb.AddForce(Vector2.up * jumpForce * Time.fixedDeltaTime);
         }
 
     }
