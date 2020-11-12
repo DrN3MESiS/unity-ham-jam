@@ -6,7 +6,7 @@ public class Block
 {
     public int id = 0;
     /* Properties */
-    public Vector3 startPosition;
+    public Vector3 startPosition, endPosition, center;
 
     public int QuantityOfBridges = 0;
     private static int[] fuelEntityAmount = new int[2] { 2, 3 };
@@ -21,7 +21,6 @@ public class Block
     /* UNITY METHODS */
     public Block()
     {
-        this.startPosition = AppController.LastEnd;
         for (int i = 0; i < 10; i++)
         {
             Mountain mountainScript = new Mountain();
@@ -34,7 +33,6 @@ public class Block
 
             unitsLeft -= mountainScript.actualWidth;
             MountainEntities.Add(mountainScript);
-
         }
     }
 
@@ -50,7 +48,12 @@ public class Block
         return mutation;
     }
 
+    public bool HasPlayerPassed(Vector3 player){
+        return player.x - this.center.x > 0;
+    }
+
     public void Draw(){
+        this.startPosition = AppController.LastEnd;
         this.block = new GameObject("Block");
         foreach (Mountain mountain in this.MountainEntities)
         {
@@ -75,6 +78,9 @@ public class Block
                     QuantityOfBridges++;
                 }
             }
-        }
+        }        
+        this.endPosition = AppController.LastEnd;
+        this.center = this.block.transform.position;
+        this.center.x = this.startPosition.x + (this.endPosition.x - this.startPosition.x) / 2f;
     }
 }
