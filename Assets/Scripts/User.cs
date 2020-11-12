@@ -110,6 +110,10 @@ public class User : MonoBehaviour
             }
         }
 
+        if (Input.GetKey(MoveBackwards))
+        {
+            rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+        }
 
 
         if (!Input.GetKey(MoveBackwards) && !Input.GetKey(MoveForward))
