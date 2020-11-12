@@ -24,7 +24,7 @@ public class AppController : MonoBehaviour
             // curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
             // Debug.Log("[GAME] >>>>>>> P2 Rendered and Obtained Block with Grade: " + curBlock.grade);
 
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
         }
     }
     void Awake()
@@ -46,6 +46,7 @@ public class AppController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateGame());
+
     }
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)

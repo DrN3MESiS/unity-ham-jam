@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6120111501647756365}
   - component: {fileID: 6120111501647756355}
   - component: {fileID: 6120111501647756364}
+  - component: {fileID: 3857700827736279052}
   m_Layer: 0
   m_Name: Entry
   m_TagString: Untagged
@@ -148,3 +149,31 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
+--- !u!68 &3857700827736279052
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120111501647756366}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.0001793, y: -1.9997349}
+  - {x: -1.2337955, y: -1.4603173}
+  - {x: -0.6476545, y: -1.0200397}
+  - {x: -0.07189228, y: -0.5488101}
+  - {x: 0.24977274, y: -0.24977471}
+  - {x: 0.67134464, y: 0.22567421}
+  - {x: 1.2858386, y: 1.0132722}
+  - {x: 2, y: 1.9999998}
+  - {x: 2, y: -2}
+  - {x: -1.8056297, y: -2}
+  - {x: -1.9490371, y: -2}
+  - {x: -2.0001793, y: -1.9997349}
