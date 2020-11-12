@@ -23,13 +23,13 @@ public class Mutate : MonoBehaviour
             if (Mutate.BlockQueue.Count < 3)
             {
                 currentState = MutateListState.GENERATE;
-                Debug.Log("[MUTATOR] Changed state to: GENERATE");
+                // Debug.Log("[MUTATOR] Changed state to: GENERATE");
             }
             else if (Mutate.BlockQueue.Count == 3)
             {
                 if (currentState != MutateListState.FULL)
                 {
-                    Debug.Log("[MUTATOR] Changed state to: FULL");
+                    // Debug.Log("[MUTATOR] Changed state to: FULL");
                 }
                 currentState = MutateListState.FULL;
             }
@@ -38,12 +38,12 @@ public class Mutate : MonoBehaviour
 
             if (currentState == MutateListState.GENERATE)
             {
-                Debug.Log("[MUTATOR] Started Action: Re-Populate Queue");
+                // Debug.Log("[MUTATOR] Started Action: Re-Populate Queue");
                 for (int i = 0; i < 3 - Mutate.BlockQueue.Count; i++)
                 {
                     GenerateMutateAndRelease();
                 }
-                Debug.Log("[MUTATOR] Completed Action: Re-Populate Queue");
+                // Debug.Log("[MUTATOR] Completed Action: Re-Populate Queue");
             }
 
             yield return new WaitForSeconds(1f);
@@ -51,18 +51,18 @@ public class Mutate : MonoBehaviour
     }
     private void Awake()
     {
-        Debug.Log("[MUTATOR] Started Action: Populate Initial Queue");
+        // Debug.Log("[MUTATOR] Started Action: Populate Initial Queue");
         GenerateMutateAndRelease();
         GenerateMutateAndRelease();
         GenerateMutateAndRelease();
-        Debug.Log("[MUTATOR] Completed Action: Populate Initial Queue");
+        // Debug.Log("[MUTATOR] Completed Action: Populate Initial Queue");
     }
 
     private void Start()
     {
-        Debug.Log("[MUTATOR] Started Action: Start Watch Function");
+        // Debug.Log("[MUTATOR] Started Action: Start Watch Function");
         StartCoroutine(WatchState());
-        Debug.Log("[MUTATOR] Completed Action: Start Watch Function");
+        // Debug.Log("[MUTATOR] Completed Action: Start Watch Function");
     }
 
     private void GenerateMutateAndRelease()
@@ -86,7 +86,7 @@ public class Mutate : MonoBehaviour
         }
 
         bestBlock = TemporalBlockQueue[TemporalBlockQueue.Count - 1];
-        Debug.Log("[MUTATOR] ===================== ADDED TO QUEUE BLOCK G: " + bestBlock.grade);
+        // Debug.Log("[MUTATOR] ===================== ADDED TO QUEUE BLOCK G: " + bestBlock.grade);
         Mutate.BlockQueue.Enqueue(bestBlock);
     }
 

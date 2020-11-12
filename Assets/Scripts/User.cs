@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class User : MonoBehaviour
 {
+    public KeyCode MoveBackwards;
     public KeyCode MoveForward;
     public KeyCode Jump;
     private Rigidbody2D rb;
-    public float forwardSpeed = -50.0f;
-    public float jumpForce = 20f;
-    public bool isTouching = false;
+    public float realSpeed = -50.0f;
+    public float jumpForce = 50f;
+    public bool isGrounded = false;
+    public float curVelocity = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +20,45 @@ public class User : MonoBehaviour
 
     void FixedUpdate()
     {
+        curVelocity = rb.velocity.magnitude;
         if (Input.GetKey(MoveForward))
         {
-            rb.AddTorque(forwardSpeed * Time.fixedDeltaTime);
+            rb.AddTorque(realSpeed * Time.fixedDeltaTime);
         }
 
+        if (Input.GetKey(MoveBackwards))
+        {
+            rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+        }
 
         if (Input.GetKeyDown(Jump))
         {
             rb.AddForce(Vector2.up * jumpForce);
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        switch (other.transform.tag)
+        {
+            case "Ground":
+                isGrounded = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        switch (other.transform.tag)
+        {
+            case "Ground":
+                isGrounded = false;
+                break;
+            default:
+                break;
         }
     }
 }
