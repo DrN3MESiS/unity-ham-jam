@@ -11,22 +11,26 @@ public class AppController : MonoBehaviour
     public static float spriteScale = 4.0f;
     List<Block> BlockScripts = new List<Block>();
 
-    public Vector3 startReference = new Vector3(0, 0, 0);
 
+    Mutate mutator = null;
     IEnumerator GenerateGame()
     {
-        for (int i = 0; i < 5; i++)
+        while (true)
         {
-            Block blockScript = new Block();
-            blockScript.Draw();
-            BlockScripts.Add(blockScript);
-            yield return new WaitForSeconds(2);
-            blockScript.block.AddComponent<EvalBlock>().BlockGrade(blockScript);
+            Block curBlock = Mutate.BlockQueue.Dequeue();
+            BlockScripts.Add(curBlock);
+            curBlock.Draw();
+            Debug.Log("[GAME] >>>>>>> P1 Rendered and Obtained Block with Grade: " + curBlock.grade);
+            // curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
+            // Debug.Log("[GAME] >>>>>>> P2 Rendered and Obtained Block with Grade: " + curBlock.grade);
+
+            yield return new WaitForSeconds(5f);
         }
     }
     void Awake()
     {
-        Mutate test = new Mutate();
+        mutator = new Mutate();
+
         EntryPrefab = Entry_Prefab;
         TopPrefab = Top_Prefab;
         ExitPrefab = Exit_Prefab;
@@ -36,7 +40,13 @@ public class AppController : MonoBehaviour
         BridgePrefab = Bridge_Prefab;
 
         gameObject.tag = "Controller";
-        // StartCoroutine(GenerateGame());
+        gameObject.AddComponent<Mutate>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(GenerateGame());
+
     }
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)

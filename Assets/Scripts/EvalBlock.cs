@@ -12,10 +12,10 @@ public class EvalBlock: MonoBehaviour
     public float blockDiff = 0.0f;
     
     public void BlockGrade(Block block){
-        Debug.Log("------------------------");
+        // Debug.Log("------------------------");
         List<Mountain> Mountains = block.MountainEntities;
         float mountainsWithValleys = 0;
-        float valleysWith3Trees = 0;
+        float valleysWith2Trees = 0;
         // float maximumDiff = 0;
         float initialHeight = 0, finalHeight = 0;
 
@@ -43,9 +43,9 @@ public class EvalBlock: MonoBehaviour
             if (Mountains[num].topIsValley)
             {
                 mountainsWithValleys += 1.0f;
-                if (Mountains[num].valley.noTrees >= 3)
+                if (Mountains[num].valley.noTrees >= 2)
                 {
-                    valleysWith3Trees += 1.0f;
+                    valleysWith2Trees += 1.0f;
                 }
             }
 
@@ -58,27 +58,27 @@ public class EvalBlock: MonoBehaviour
         // Checking the amount of valleys appearing in the mountains
 
         if (percentageOfValleys >= 80){
-            valleyPercentage += 1.0f;
+            valleyPercentage += 0.75f;
         }
         else if (percentageOfValleys >= 60){
             valleyPercentage += 0.5f;
         }
         else{
-            valleyPercentage -= 1.0f;
+            valleyPercentage = 0f;
         }
 
         // Checking the amount of Trees on mountains
 
-        int percentageOfTreesInValleys = (int)(valleysWith3Trees / mountainsWithValleys * 100.0f);
+        int percentageOfTreesInValleys = (int)(valleysWith2Trees / mountainsWithValleys * 100.0f);
 
         if (percentageOfTreesInValleys >= 60){
-            treesPercentage += 1.0f;
-        }
-        else if (percentageOfTreesInValleys >= 40){
             treesPercentage += 0.5f;
         }
+        else if (percentageOfTreesInValleys >= 40){
+            treesPercentage += 0.25f;
+        }
         else{
-            treesPercentage -= 1.0f;
+            treesPercentage = 0.0f;
         }
 
         // Checking if there are bridges
@@ -109,7 +109,7 @@ public class EvalBlock: MonoBehaviour
 
         grade = mountainDiff + valleyPercentage + treesPercentage + bridgesQuantity + blockDiff;            
         if (grade >= 3.0f){
-            Debug.Log("Good block ");
+            // Debug.Log("Good block ");
         }
 
         block.grade = grade;
