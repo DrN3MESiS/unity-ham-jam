@@ -50,6 +50,7 @@ public class AppController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateGame());
+
     }
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)
