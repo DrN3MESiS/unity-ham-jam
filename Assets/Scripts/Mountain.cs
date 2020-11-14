@@ -131,13 +131,14 @@ public class Mountain
     }
     
     public static void Ground(Transform parent, float x, float y){
-        Vector3 scale = parent.localScale;
         Vector3 place = AppController.LastEnd;
         place.x += x;
         place.y -= y;
         float groundHeight = place.y - AppController.minHeight;
         place.y -= groundHeight / 2f;
+        Vector3 scale = parent.localScale;
         scale.y = groundHeight / AppController.spriteScale;
+        scale.x /= AppController.sceneScale;
         AppController.Draw(AppController.GroundPrefab, place, scale, parent);
     }
 }

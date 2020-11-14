@@ -10,6 +10,7 @@ public class AppController : MonoBehaviour
     public static Vector3 LastEnd = Vector3.zero;
     public static float minHeight = -10;
     public static float spriteScale = 4.0f;
+    public static float sceneScale = 1.5f;
     Queue<Block> BlockScripts = new Queue<Block>();
     public static GameObject player;
     public Block curBlock;
@@ -77,8 +78,11 @@ public class AppController : MonoBehaviour
 
     public static GameObject Draw(GameObject prefab, Vector3 pos, Vector3 scale, Transform parent)
     {
+        Vector3 fixedScale = scale * sceneScale; 
+        pos.x *= sceneScale;
+        pos.y *= sceneScale;
         GameObject inst = Instantiate(prefab, pos, Quaternion.Euler(0, 0, 0));
-        inst.transform.localScale = scale;
+        inst.transform.localScale = fixedScale;
         inst.transform.SetParent(parent);
 
         return inst;
