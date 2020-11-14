@@ -67,13 +67,16 @@ public class Block
             if (curr.Exit != null && next.Entry != null)
             {
                 float distance = next.Entry.transform.position.x - curr.Exit.transform.position.x;
-                if (distance <= 1.0f)
+                if (distance <= 1.0f * AppController.sceneScale)
                 {
-                    float height = curr.Exit.transform.position.y + (curr.exitHeight / 2.0f) - 0.25f;
+                    float prefabHeight = 1/AppController.spriteScale;
+                    prefabHeight *= (AppController.sceneScale - 1);
+                    float height = curr.Exit.transform.position.y + (curr.exitHeight / 2.0f) - prefabHeight;
                     if(next.Entry.transform.position.y < curr.Exit.transform.position.y){
-                        height = next.Entry.transform.position.y + (next.entryHeight / 2.0f) - 0.25f;
+                        height = next.Entry.transform.position.y + (next.entryHeight / 2.0f) - prefabHeight;
                     }
                     Vector3 pos = new Vector3((curr.Exit.transform.position.x + (distance / 2.0f)), height, 0);
+                    pos /= AppController.sceneScale;
                     AppController.Draw(AppController.BridgePrefab, pos, AppController.BridgePrefab.transform.localScale, this.block.transform);
                     QuantityOfBridges++;
                 }
@@ -82,5 +85,6 @@ public class Block
         this.endPosition = AppController.LastEnd;
         this.center = this.block.transform.position;
         this.center.x = this.startPosition.x + (this.endPosition.x - this.startPosition.x) / 2f;
+        this.center *= AppController.sceneScale;
     }
 }
