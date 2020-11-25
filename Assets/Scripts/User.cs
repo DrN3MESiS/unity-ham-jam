@@ -65,6 +65,19 @@ public class User : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (isGrounded)
+        {
+            // JUMP
+            if (Input.GetKeyDown(Jump))
+            {
+                rb.AddForce(Vector2.up * jumpForce);
+                Debug.Log("Pressed SPACE");
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         curVelocity = rb.velocity.x;
@@ -110,9 +123,25 @@ public class User : MonoBehaviour
             }
         }
 
+        // MOVE BACKWARDS
         if (Input.GetKey(MoveBackwards))
         {
-            rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+            if (curVelocity >= -15)
+            {
+                Debug.Log("Moving Backwards");
+                rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+            }
+
+        }
+        else
+        {
+            if (idle)
+            {
+                if (curVelocity < 1 && curVelocity < 0)
+                {
+                    rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+                }
+            }
         }
 
 
