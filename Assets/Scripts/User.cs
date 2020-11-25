@@ -12,29 +12,80 @@ public class User : MonoBehaviour
     public float jumpForce = 50f;
     public bool isGrounded = false;
     public float curVelocity = 0f;
+    public bool idle = true;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (isGrounded)
+        {
+            // JUMP
+            if (Input.GetKeyDown(Jump))
+            {
+                rb.AddForce(Vector2.up * jumpForce);
+                Debug.Log("Pressed SPACE");
+            }
+        }
+    }
+
     void FixedUpdate()
     {
-        curVelocity = rb.velocity.magnitude;
+        curVelocity = rb.velocity.x;
+
+        // MOVE FORWARD
         if (Input.GetKey(MoveForward))
         {
-            rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+            if (curVelocity <= 15)
+            {
+                Debug.Log("Forward");
+                rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+            }
+        }
+        else
+        {
+            if (idle)
+            {
+                if (curVelocity > 1 && curVelocity > 0)
+                {
+                    rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+                }
+            }
         }
 
+        // MOVE BACKWARDS
         if (Input.GetKey(MoveBackwards))
         {
-            rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+            if (curVelocity >= -15)
+            {
+                Debug.Log("Moving Backwards");
+                rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+            }
+
+        }
+        else
+        {
+            if (idle)
+            {
+                if (curVelocity < 1 && curVelocity < 0)
+                {
+                    rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+                }
+            }
         }
 
-        if (Input.GetKey(Jump))
+
+
+        if (!Input.GetKey(MoveBackwards) && !Input.GetKey(MoveForward))
         {
-            rb.AddForce(Vector2.up * jumpForce * Time.fixedDeltaTime);
-            Debug.Log("Pressed SPACE");
+            idle = true;
+        }
+        else
+        {
+            idle = false;
         }
 
     }
