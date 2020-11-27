@@ -8,7 +8,7 @@ public class AppController : MonoBehaviour
     public GameObject Entry_Prefab, Top_Prefab, Exit_Prefab, Tree_Prefab, Valley_Prefab, Ground_Prefab, Bridge_Prefab;
     public static GameObject EntryPrefab, TopPrefab, ExitPrefab, TreePrefab, ValleyPrefab, GroundPrefab, BridgePrefab;
     public static Vector3 LastEnd = Vector3.zero;
-    public static float minHeight = -10;
+    public static float minHeight = -100;
     public static float spriteScale = 4.0f;
     public static float sceneScale = 1.5f;
     Queue<Block> BlockScripts = new Queue<Block>();
@@ -69,8 +69,8 @@ public class AppController : MonoBehaviour
 
     public void GenerateBlock(){
         curBlock = Mutate.BlockQueue.Dequeue();
+        curBlock.Draw();
         BlockScripts.Enqueue(curBlock);
-        curBlock.Draw();        
         // Debug.Log("[GAME] >>>>>>> P1 Rendered and Obtained Block with Grade: " + curBlock.grade);
         curBlock.block.AddComponent<EvalBlock>().BlockGrade(curBlock);
         // Debug.Log("[GAME] >>>>>>> P2 Rendered and Obtained Block with Grade: " + curBlock.grade);
