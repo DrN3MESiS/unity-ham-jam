@@ -76,6 +76,17 @@ public class User : MonoBehaviour
                 Debug.Log("Pressed SPACE");
             }
         }
+        IncreaseMeters();
+        CheckForGasoline();
+    }
+
+    private void CheckForGasoline(){
+        if (FuelQuantity < 80){
+            if (fuelsOn < 2){
+                MakeAppearGasoline();
+            }
+            
+        }
     }
 
     void FixedUpdate()
