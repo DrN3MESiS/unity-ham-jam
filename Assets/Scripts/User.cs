@@ -76,6 +76,10 @@ public class User : MonoBehaviour
                 Debug.Log("Pressed SPACE");
             }
         }
+        if(FuelQuantity <= 0) {
+            //TODO UI Message
+            Debug.Log("Ya perdiste");
+        }
         IncreaseMeters();
         CheckForGasoline();
     }
@@ -84,8 +88,7 @@ public class User : MonoBehaviour
         if (FuelQuantity < 80){
             if (fuelsOn < 2){
                 MakeAppearGasoline();
-            }
-            
+            }            
         }
     }
 
