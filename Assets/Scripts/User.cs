@@ -13,7 +13,7 @@ public class User : MonoBehaviour
     public bool isGrounded = false;
     public float curVelocity = 0f;
     public bool idle = true;
-    public int Meters = 0;
+    public float maxMeters = 0;
     public GameObject gasoline;
     public Vector2 limit;
     private Vector2 valuesOfFuel = new Vector2(60, 80);
@@ -43,8 +43,12 @@ public class User : MonoBehaviour
             if (Input.GetKeyDown(Jump))
             {
                 rb.AddForce(Vector2.up * jumpForce);
-                Debug.Log("Pressed SPACE");
+                // Debug.Log("Pressed SPACE");
             }
+        }
+        if(FuelQuantity <= 0) {
+            //TODO UI Message
+            Debug.Log("Ya perdiste");
         }
         IncreaseMeters();
         CheckForGasoline();
@@ -54,8 +58,7 @@ public class User : MonoBehaviour
         if (FuelQuantity < 80){
             if (fuelsOn < 2){
                 MakeAppearGasoline();
-            }
-            
+            }            
         }
     }
 
@@ -68,7 +71,7 @@ public class User : MonoBehaviour
         {
             if (curVelocity <= 15)
             {
-                Debug.Log("Forward");
+                // Debug.Log("Forward");
                 rb.AddTorque(realSpeed * Time.fixedDeltaTime);
             }
         }
@@ -167,13 +170,7 @@ public class User : MonoBehaviour
     }
 
     private void IncreaseMeters(){
-        int before = Meters;
-        Meters = (int)(gameObject.transform.position.x - startingX);
-        int diff = Mathf.Abs(Meters - before);
-        if (diff > 0){
-            FuelQuantity -= diff;
-        }
+        maxMeters = Mathf.Max(transform.position.x, maxMeters);
+        FuelQuantity -= Time.deltaTime;
     }
-
-
 }
