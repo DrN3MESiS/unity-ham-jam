@@ -13,10 +13,26 @@ public class User : MonoBehaviour
     public bool isGrounded = false;
     public float curVelocity = 0f;
     public bool idle = true;
+    public int Meters = 0;
+    public GameObject gasoline;
+    public Vector2 limit;
+    private Vector2 valuesOfFuel = new Vector2(60, 80);
+    private float startingX;
+    private float previousX;
+    public float FuelQuantity = 100.0f;
+    public int fuelsOn = 0;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        startingX = gameObject.transform.position.x;
+        previousX = startingX;
+        MakeAppearGasoline();
+        limit.x /= 2;
+        limit.y /= 2;
     }
 
     private void Update()
@@ -29,6 +45,17 @@ public class User : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce);
                 Debug.Log("Pressed SPACE");
             }
+        }
+        IncreaseMeters();
+        CheckForGasoline();
+    }
+
+    private void CheckForGasoline(){
+        if (FuelQuantity < 80){
+            if (fuelsOn < 2){
+                MakeAppearGasoline();
+            }
+            
         }
     }
 
@@ -90,6 +117,31 @@ public class User : MonoBehaviour
 
     }
 
+    private void MakeAppearGasoline(){
+        Vector3 pos;
+        if (previousX < gameObject.transform.position.x){
+            pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+        else{
+            pos = new Vector3(previousX, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+        
+        pos.x += Random.Range(limit.x, limit.y);
+        float quantityOfFuel = Random.Range(0.0f, 1.0f);
+        if (quantityOfFuel > 0.5f){
+            quantityOfFuel = valuesOfFuel.y;
+        }
+        else{
+            quantityOfFuel = valuesOfFuel.x;
+        }
+        pos.y += 5.0f;
+        
+        previousX = pos.x;
+        GameObject fuel_ = Instantiate(gasoline, pos, Quaternion.Euler(0, 0, 0));
+        fuel_.GetComponent<Gasoline>().gasolineValue = (int)quantityOfFuel;
+        fuelsOn++;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         switch (other.transform.tag)
@@ -113,4 +165,15 @@ public class User : MonoBehaviour
                 break;
         }
     }
+
+    private void IncreaseMeters(){
+        int before = Meters;
+        Meters = (int)(gameObject.transform.position.x - startingX);
+        int diff = Mathf.Abs(Meters - before);
+        if (diff > 0){
+            FuelQuantity -= diff;
+        }
+    }
+
+
 }
