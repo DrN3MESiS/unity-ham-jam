@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+[RequireComponent(typeof(CircleCollider2D), typeof(Rigidbody2D))]
 public class User : MonoBehaviour
 {
     public KeyCode MoveBackwards;
@@ -22,7 +24,7 @@ public class User : MonoBehaviour
     public float FuelQuantity = 100.0f;
     public int fuelsOn = 0;
     private Slider energySlider;
-    public bool hasLost = false;
+    public Text score;
     
     
     // Start is called before the first frame update
@@ -51,6 +53,7 @@ public class User : MonoBehaviour
             }
         }
         energySlider.value = FuelQuantity / 100.0f;
+        score.text = maxMeters.ToString();
         IncreaseMeters();
         CheckForGasoline();
     }
@@ -64,8 +67,7 @@ public class User : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        if(!hasLost){            
+    {           
             curVelocity = rb.velocity.x;
 
             // MOVE FORWARD
@@ -108,13 +110,10 @@ public class User : MonoBehaviour
                     }
                 }
             }
-        }
 
-        if(FuelQuantity <= 0) {
-            //TODO UI Message
+        if(FuelQuantity <= 0) {            
             rb.velocity = Vector2.zero;
-            hasLost = true;
-            Debug.Log("Ya perdiste");
+            ButtonsFunctions.Death();            
         }
 
         if (!Input.GetKey(MoveBackwards) && !Input.GetKey(MoveForward))

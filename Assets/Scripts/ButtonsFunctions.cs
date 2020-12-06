@@ -17,13 +17,16 @@ public class ButtonsFunctions : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("Scene02");
+        Time.timeScale = 1;
+        Un_Pause();
+        IsPaused = false;
         //SceneManager.LoadScene(Application.loadedLevel);
     }
     public void Menu()
     {
         SceneManager.LoadScene("Start");
     }
-    public void Death()
+    public static void Death()
     {
         SceneManager.LoadScene("Death");
     }
