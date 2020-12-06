@@ -50,34 +50,7 @@ public class User : MonoBehaviour
                 // Debug.Log("Pressed SPACE");
             }
         }
-        IncreaseMeters();
-        CheckForGasoline();
-    }
-
-    private void CheckForGasoline(){
         energySlider.value = FuelQuantity / 100.0f;
-        if (FuelQuantity < 80){
-            if (fuelsOn < 2){
-                MakeAppearGasoline();
-            }            
-        }
-    }
-
-    private void Update()
-    {
-        if (isGrounded)
-        {
-            // JUMP
-            if (Input.GetKeyDown(Jump))
-            {
-                rb.AddForce(Vector2.up * jumpForce);
-                Debug.Log("Pressed SPACE");
-            }
-        }
-        if(FuelQuantity <= 0) {
-            //TODO UI Message
-            Debug.Log("Ya perdiste");
-        }
         IncreaseMeters();
         CheckForGasoline();
     }
@@ -133,27 +106,6 @@ public class User : MonoBehaviour
                     {
                         rb.AddTorque(realSpeed * Time.fixedDeltaTime);
                     }
-                }
-            }
-        }
-
-        // MOVE BACKWARDS
-        if (Input.GetKey(MoveBackwards))
-        {
-            if (curVelocity >= -15)
-            {
-                Debug.Log("Moving Backwards");
-                rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
-            }
-
-        }
-        else
-        {
-            if (idle)
-            {
-                if (curVelocity < 1 && curVelocity < 0)
-                {
-                    rb.AddTorque(realSpeed * Time.fixedDeltaTime);
                 }
             }
         }

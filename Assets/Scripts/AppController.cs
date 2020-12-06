@@ -15,11 +15,6 @@ public class AppController : MonoBehaviour
     public static GameObject player;
     public Block curBlock;
     Mutate mutator = null;
-    IEnumerator GenerateGame()
-    {
-        // int i = 0;
-        // while (true)
-        // {
 
     void Awake()
     {
