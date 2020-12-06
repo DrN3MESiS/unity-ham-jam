@@ -18,7 +18,7 @@ public class Gasoline : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             // Make Trigger
             gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
