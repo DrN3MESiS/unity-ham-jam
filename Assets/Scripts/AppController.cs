@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class AppController : MonoBehaviour
 {
@@ -21,8 +20,6 @@ public class AppController : MonoBehaviour
         // int i = 0;
         // while (true)
         // {
-
-    public KeyCode restart = KeyCode.R;
 
     void Awake()
     {
@@ -57,13 +54,6 @@ public class AppController : MonoBehaviour
                 GenerateBlock();
             }
         }
-        if(Input.GetKeyDown(restart)){
-            RestartScene();
-        }
-    }
-
-    public void RestartScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GenerateBlock(){
