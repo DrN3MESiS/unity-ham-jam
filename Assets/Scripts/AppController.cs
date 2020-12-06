@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AppController : MonoBehaviour
 {
@@ -16,8 +17,11 @@ public class AppController : MonoBehaviour
     public Block curBlock;
     Mutate mutator = null;
 
+    public KeyCode restart = KeyCode.R;
+
     void Awake()
     {
+        LastEnd = Vector3.zero;
         mutator = new Mutate();
 
         EntryPrefab = Entry_Prefab;
@@ -44,10 +48,17 @@ public class AppController : MonoBehaviour
     private void Update() {
         if(curBlock != null){
             if(curBlock.HasPlayerPassed(player.transform.position)){
-                Destroy(BlockScripts.Dequeue().block);
+                // Destroy(BlockScripts.Dequeue().block);
                 GenerateBlock();
             }
         }
+        if(Input.GetKeyDown(restart)){
+            RestartScene();
+        }
+    }
+
+    public void RestartScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GenerateBlock(){

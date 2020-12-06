@@ -21,6 +21,7 @@ public class User : MonoBehaviour
     private float previousX;
     public float FuelQuantity = 100.0f;
     public int fuelsOn = 0;
+    public bool hasLost = false;
     
     
     // Start is called before the first frame update
@@ -46,10 +47,6 @@ public class User : MonoBehaviour
                 // Debug.Log("Pressed SPACE");
             }
         }
-        if(FuelQuantity <= 0) {
-            //TODO UI Message
-            Debug.Log("Ya perdiste");
-        }
         IncreaseMeters();
         CheckForGasoline();
     }
@@ -64,50 +61,57 @@ public class User : MonoBehaviour
 
     void FixedUpdate()
     {
-        curVelocity = rb.velocity.x;
+        if(!hasLost){            
+            curVelocity = rb.velocity.x;
 
-        // MOVE FORWARD
-        if (Input.GetKey(MoveForward))
-        {
-            if (curVelocity <= 15)
+            // MOVE FORWARD
+            if (Input.GetKey(MoveForward))
             {
-                // Debug.Log("Forward");
-                rb.AddTorque(realSpeed * Time.fixedDeltaTime);
-            }
-        }
-        else
-        {
-            if (idle)
-            {
-                if (curVelocity > 1 && curVelocity > 0)
+                if (curVelocity <= 15)
                 {
-                    rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
-                }
-            }
-        }
-
-        // MOVE BACKWARDS
-        if (Input.GetKey(MoveBackwards))
-        {
-            if (curVelocity >= -15)
-            {
-                Debug.Log("Moving Backwards");
-                rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
-            }
-
-        }
-        else
-        {
-            if (idle)
-            {
-                if (curVelocity < 1 && curVelocity < 0)
-                {
+                    // Debug.Log("Forward");
                     rb.AddTorque(realSpeed * Time.fixedDeltaTime);
                 }
             }
+            else
+            {
+                if (idle)
+                {
+                    if (curVelocity > 1 && curVelocity > 0)
+                    {
+                        rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+                    }
+                }
+            }
+
+            // MOVE BACKWARDS
+            if (Input.GetKey(MoveBackwards))
+            {
+                if (curVelocity >= -15)
+                {
+                    // Debug.Log("Moving Backwards");
+                    rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+                }
+
+            }
+            else
+            {
+                if (idle)
+                {
+                    if (curVelocity < 1 && curVelocity < 0)
+                    {
+                        rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+                    }
+                }
+            }
         }
 
-
+        if(FuelQuantity <= 0) {
+            //TODO UI Message
+            rb.velocity = Vector2.zero;
+            hasLost = true;
+            Debug.Log("Ya perdiste");
+        }
 
         if (!Input.GetKey(MoveBackwards) && !Input.GetKey(MoveForward))
         {
