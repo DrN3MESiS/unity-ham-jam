@@ -6,12 +6,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CircleCollider2D), typeof(Rigidbody2D))]
 public class User : MonoBehaviour
 {
+    public float maxSpeedMagnitude = 10f;
     public KeyCode MoveBackwards;
     public KeyCode MoveForward;
     public KeyCode Jump;
     private Rigidbody2D rb;
-    public float realSpeed = -50.0f;
-    public float jumpForce = 50f;
+    public float realSpeed = -100.0f;
+    public float jumpForce = 300f;
     public bool isGrounded = false;
     public float curVelocity = 0f;
     public bool idle = true;
@@ -25,20 +26,21 @@ public class User : MonoBehaviour
     public int fuelsOn = 0;
     private Slider energySlider;
     public Text score;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
         energySlider = GameObject.FindObjectOfType<Slider>();
         energySlider.value = FuelQuantity / 100.0f;
         rb = GetComponent<Rigidbody2D>();
-        
+
         startingX = gameObject.transform.position.x;
         previousX = startingX;
-        MakeAppearGasoline();
+        // MakeAppearGasoline();
         limit.x /= 2;
         limit.y /= 2;
+        StartCoroutine(CheckForGasoline());
     }
 
     private void Update()
@@ -55,65 +57,78 @@ public class User : MonoBehaviour
         energySlider.value = FuelQuantity / 100.0f;
         score.text = maxMeters.ToString();
         IncreaseMeters();
-        CheckForGasoline();
+        if (FuelQuantity > 100)
+        {
+            FuelQuantity = 100;
+        }
     }
 
-    private void CheckForGasoline(){
-        if (FuelQuantity < 80){
-            if (fuelsOn < 2){
-                MakeAppearGasoline();
-            }            
+    private IEnumerator CheckForGasoline()
+    {
+        while (true)
+        {
+            if (FuelQuantity < 40)
+            {
+                if (fuelsOn < 2)
+                {
+                    MakeAppearGasoline();
+                }
+            }
+
+            yield return new WaitForSeconds(10f);
+
         }
     }
 
     void FixedUpdate()
-    {           
-            curVelocity = rb.velocity.x;
+    {
+        curVelocity = rb.velocity.x;
 
-            // MOVE FORWARD
-            if (Input.GetKey(MoveForward))
+        // MOVE FORWARD
+        if (Input.GetKey(MoveForward))
+        {
+            if (curVelocity <= maxSpeedMagnitude)
             {
-                if (curVelocity <= 15)
+                // Debug.Log("Forward");
+                rb.AddTorque(realSpeed * Time.fixedDeltaTime);
+            }
+        }
+        else
+        {
+            if (idle)
+            {
+                if (curVelocity > 1 && curVelocity > 0)
                 {
-                    // Debug.Log("Forward");
+                    rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+                }
+            }
+        }
+
+        // MOVE BACKWARDS
+        if (Input.GetKey(MoveBackwards))
+        {
+            if (curVelocity >= -maxSpeedMagnitude)
+            {
+                // Debug.Log("Moving Backwards");
+                rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
+            }
+
+        }
+        else
+        {
+            if (idle)
+            {
+                if (curVelocity < 1 && curVelocity < 0)
+                {
                     rb.AddTorque(realSpeed * Time.fixedDeltaTime);
                 }
             }
-            else
-            {
-                if (idle)
-                {
-                    if (curVelocity > 1 && curVelocity > 0)
-                    {
-                        rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
-                    }
-                }
-            }
+        }
 
-            // MOVE BACKWARDS
-            if (Input.GetKey(MoveBackwards))
-            {
-                if (curVelocity >= -15)
-                {
-                    // Debug.Log("Moving Backwards");
-                    rb.AddTorque(-1 * realSpeed * Time.fixedDeltaTime);
-                }
-
-            }
-            else
-            {
-                if (idle)
-                {
-                    if (curVelocity < 1 && curVelocity < 0)
-                    {
-                        rb.AddTorque(realSpeed * Time.fixedDeltaTime);
-                    }
-                }
-            }
-
-        if(FuelQuantity <= 0) {            
+        if (FuelQuantity <= 0)
+        {
             rb.velocity = Vector2.zero;
-            ButtonsFunctions.Death();            
+            ButtonsFunctions.Death();
         }
 
         if (!Input.GetKey(MoveBackwards) && !Input.GetKey(MoveForward))
@@ -127,25 +142,31 @@ public class User : MonoBehaviour
 
     }
 
-    private void MakeAppearGasoline(){
+    private void MakeAppearGasoline()
+    {
         Vector3 pos;
-        if (previousX < gameObject.transform.position.x){
+        if (previousX < gameObject.transform.position.x)
+        {
             pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        else{
+        else
+        {
             pos = new Vector3(previousX, gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        
+
         pos.x += Random.Range(limit.x, limit.y);
         float quantityOfFuel = Random.Range(0.0f, 1.0f);
-        if (quantityOfFuel > 0.5f){
+        if (quantityOfFuel > 0.5f)
+        {
             quantityOfFuel = valuesOfFuel.y;
         }
-        else{
+        else
+        {
             quantityOfFuel = valuesOfFuel.x;
         }
-        pos.y += 5.0f;
-        
+        pos.y += 2.0f;
+        pos.x += 5.0f;
+
         previousX = pos.x;
         GameObject fuel_ = Instantiate(gasoline, pos, Quaternion.Euler(0, 0, 0));
         fuel_.GetComponent<Gasoline>().gasolineValue = (int)quantityOfFuel;
@@ -176,8 +197,9 @@ public class User : MonoBehaviour
         }
     }
 
-    private void IncreaseMeters(){
+    private void IncreaseMeters()
+    {
         maxMeters = Mathf.Max(transform.position.x, maxMeters);
-        FuelQuantity -= Time.deltaTime;
+        FuelQuantity -= Time.deltaTime * 2;
     }
 }
