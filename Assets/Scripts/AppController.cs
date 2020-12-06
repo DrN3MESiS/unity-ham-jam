@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AppController : MonoBehaviour
 {
@@ -21,20 +22,11 @@ public class AppController : MonoBehaviour
         // while (true)
         // {
 
-        // }
-        for (int i = 0; i < 5; i++)
-        {
-            Block blockScript = new Block();
-            blockScript.Draw();
-            BlockScripts.Add(blockScript);
-            yield return new WaitForSeconds(2);
-            startReference = new Vector3(startReference.x + Mathf.Abs(blockScript.unitsLeft - 100), startReference.y, startReference.z);
-            // i++;
-            blockScript.block.AddComponent<EvalBlock>().BlockGrade(blockScript);
-        }
-    }
+    public KeyCode restart = KeyCode.R;
+
     void Awake()
     {
+        LastEnd = Vector3.zero;
         mutator = new Mutate();
 
         EntryPrefab = Entry_Prefab;
@@ -61,10 +53,17 @@ public class AppController : MonoBehaviour
     private void Update() {
         if(curBlock != null){
             if(curBlock.HasPlayerPassed(player.transform.position)){
-                Destroy(BlockScripts.Dequeue().block);
+                // Destroy(BlockScripts.Dequeue().block);
                 GenerateBlock();
             }
         }
+        if(Input.GetKeyDown(restart)){
+            RestartScene();
+        }
+    }
+
+    public void RestartScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GenerateBlock(){
