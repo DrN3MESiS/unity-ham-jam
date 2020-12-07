@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7059642645168923469}
   - component: {fileID: 1222276803682828345}
   m_Layer: 0
-  m_Name: IMG-0555
+  m_Name: Hamster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8279234525343901798}
   - component: {fileID: 3130802682955497814}
   m_Layer: 0
-  m_Name: IMG-0556
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
