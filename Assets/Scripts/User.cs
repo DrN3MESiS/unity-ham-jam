@@ -16,7 +16,7 @@ public class User : MonoBehaviour
     public bool isGrounded = false;
     public float curVelocity = 0f;
     public bool idle = true;
-    public float maxMeters = 0;
+    public int maxMeters = 0;
     public GameObject gasoline;
     public Vector2 limit;
     private Vector2 valuesOfFuel = new Vector2(60, 80);
@@ -199,7 +199,7 @@ public class User : MonoBehaviour
 
     private void IncreaseMeters()
     {
-        maxMeters = Mathf.Max(transform.position.x, maxMeters);
+        maxMeters = (int)Mathf.Max(transform.position.x, (float)maxMeters);
         FuelQuantity -= Time.deltaTime * 2;
     }
 }
