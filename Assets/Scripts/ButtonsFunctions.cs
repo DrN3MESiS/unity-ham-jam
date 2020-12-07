@@ -13,6 +13,9 @@ public class ButtonsFunctions : MonoBehaviour
     public void Game()
     {
         SceneManager.LoadScene("Scene02");
+        Time.timeScale = 1;
+        Un_Pause();
+        IsPaused = false;
     }
     public void Restart()
     {
