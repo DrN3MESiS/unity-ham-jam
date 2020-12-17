@@ -6,7 +6,7 @@ The following is a game developed for our class: "Computational Grammars" in ord
 ## Tools
 - Unity 2019.4.6f1
 
-###Authors
+### Authors
 - Alan Enrique Maldonado Navarro
 - Guillermo Gonzalez Mena
 - Hector Jorge Morales Arch
